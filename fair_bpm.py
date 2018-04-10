@@ -19,7 +19,7 @@ class O(Pretty):
 
 class Activity(Pretty):
     def __init__(self, id, name):
-        print("Init Activity")
+        #print("Init Activity")
         def __init__(self, id=-1, name='unknown'):
             O.__init__(self, id=-1, name=name)
         self.id = id
@@ -68,19 +68,18 @@ class SimpleJobRunner(Pretty):
 
 
 print "SFSG"
-one=Activity("id11", "name22")
-print one.id
-print one.name
-one.execute()
+# one=Activity("id11", "name22")
+# print one.id
+# print one.name
+# one.execute()
 
 two=Say("id22", "The Say Activity")
 three=Sing("id33", "The Sing Activity")
 
+# two.execute()
+# three.execute()
 
-two.execute()
-three.execute()
-
-ps=Process("p1", "pOne")
+ps=Process("p1", "Process One")
 ps.activities.append(two)
 ps.activities.append(three)
 
