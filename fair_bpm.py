@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-import utest
+#import utest
+import copy
 
 class Pretty(object):
     def __repr__(i):
@@ -46,17 +47,23 @@ class Process(Pretty):
         self.activities=[]
 
     def createJob(self, id, name):
-        job = Job(id, name)
-        job.activities=list(self.activities)
+        job = Job(id, name, self)
+        return job
 
 
 
 class Job(Pretty):
-    def __init__(self, id, name):
+    def __init__(self, id, name, process):
         self.id=id
         self.name=name
-        self.process=None
+        self.process=process
+        self.activities=copy.deepcopy(process.activities)
 
+class SimpleJobRunner(Pretty):
+    def executeJob(self, job):
+        print("Starting job "+str(job) )
+        for act in job.activities:
+            act.execute()
 
 
 
@@ -78,3 +85,20 @@ ps.activities.append(two)
 ps.activities.append(three)
 
 print("ps="+str(ps) )
+
+job=ps.createJob(111, "FirstJob")
+
+# print("job before change="+str(job) )
+#
+# job.activities[0].name="different"
+#
+# print("job after change="+str(job) )
+#
+# print("ps after change="+str(ps) )
+
+print("About to run simple job")
+
+runner = SimpleJobRunner()
+runner.executeJob(job)
+
+
