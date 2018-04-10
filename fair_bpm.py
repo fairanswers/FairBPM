@@ -36,6 +36,30 @@ class Sing(Activity):
     def execute(self):
         print("In Sing")
 
+class Process(Pretty):
+    def __init__(self, id, name):
+        print("Init Process")
+        def __init__(self, id=-1, name='unknown'):
+            O.__init__(self, id=-1, name=name)
+        self.id = id
+        self.name = name
+        self.activities=[]
+
+    def createJob(self, id, name):
+        job = Job(id, name)
+        job.activities=list(self.activities)
+
+
+
+class Job(Pretty):
+    def __init__(self, id, name):
+        self.id=id
+        self.name=name
+        self.process=None
+
+
+
+
 print "SFSG"
 one=Activity("id11", "name22")
 print one.id
@@ -49,3 +73,8 @@ three=Sing("id33", "The Sing Activity")
 two.execute()
 three.execute()
 
+ps=Process("p1", "pOne")
+ps.activities.append(two)
+ps.activities.append(three)
+
+print("ps="+str(ps) )
