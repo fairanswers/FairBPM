@@ -107,8 +107,8 @@ print "SFSG"
 
 two=Say("id22", "The Say Activity")
 three=Sing("id33", "The Sing Activity")
-two.addParent(three.id)
-#three.addParent(two.id)
+#two.addParent(three.id)
+three.addParent(two.id)
 
 ps=Process("p1", "Process One")
 ps.activities.append(two)
