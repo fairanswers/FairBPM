@@ -83,13 +83,13 @@ class Job(Pretty):
 
 class SimpleJobRunner(Pretty):
     def executeJob(self, job):
-        print("Starting job "+str(job.name) )
+        print("Starting job for SimpleJobRunner.  Run all activites. "+str(job.name) )
         for act in job.activities:
             act.execute()
 
 class BetterJobRunner(Pretty):
     def executeJob(self, job):
-        print("Starting job "+str(job.name) )
+        print("Better Job Runner.  Start with the one with no parents. "+str(job.name) )
         first_activity=job.getFirstActivity()
         first_activity.execute()
         first_activity.state=Activity.COMPLETE
