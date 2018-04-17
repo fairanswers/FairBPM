@@ -29,20 +29,22 @@ class Activity(Pretty):
         self.parents=[]
         self.state=Activity.WAITING
 
-    def addParent(self, parentId):
-        self.parents.append(parentId)
+    def addParent(self, parent):
+        if type(parent) is str:
+            self.parents.append(parent)
+        else:
+            self.parents.append(parent.id)
 
     def execute(self):
         print("In Activity Execute. id="+self.id+" name="+self.name)
 
 class Say(Activity):
     def execute(self):
-        print("In Say")
-
+        print("In Say " +self.name)
 
 class Sing(Activity):
     def execute(self):
-        print("In Sing")
+        print("In Sing "+ self.name)
 
 class Process(Pretty):
     def __init__(self, id, name):
@@ -56,8 +58,6 @@ class Process(Pretty):
     def createJob(self, id, name):
         job = Job(id, name, self)
         return job
-
-
 
 class Job(Pretty):
     def __init__(self, id, name, process):
@@ -74,9 +74,9 @@ class Job(Pretty):
 
     def findChildren(self, activity):
         children=[]
-        id=activity.id
+        aid=activity.id
         for act in self.activities:
-            if act.state != Activity.COMPLETE and id in act.parents:
+            if act.state != Activity.COMPLETE and aid in act.parents:
                 children.append(act)
         return children
 
@@ -103,24 +103,54 @@ class BetterJobRunner(Pretty):
                     act.execute()
                     act.state=Activity.COMPLETE
 
+class FlexibleJobRunner(Pretty):
+    def executeJob(self, job):
+        print "Flexible Job Runner.  Handle multiple starts and runs multiple children."
+        self.setAllParentlessActivityToReady(job)
+        while self.hasReadyActivities(job):
+            act = self.findReadyActivity(job)
+            act.execute()
+            act.state=Activity.COMPLETE
+            nextReady = job.findChildren(act)
+            for nr in nextReady:
+                nr.state = Activity.READY
+
+    def setAllParentlessActivityToReady(self, job):
+        for act in job.activities:
+            if len(act.parents) == 0:
+                act.state=Activity.READY
+
+    def hasReadyActivities(self, job):
+        for act in job.activities:
+            if act.state == Activity.READY:
+                return True
+        return False
+
+    def findReadyActivity(self, job):
+        for act in job.activities:
+            if act.state == Activity.READY:
+                return act
+
 print "SFSG"
 
 two=Say("id22", "The Say Activity")
 three=Sing("id33", "The Sing Activity")
-#two.addParent(three.id)
-three.addParent(two.id)
+three.addParent(two)
+four=Say("id44", "The Second Say Activity")
+four.addParent(two)
+five=Say("id55", "The Second Sing Activity")
+five.addParent(two)
 
-ps=Process("p1", "Process One")
+runner = FlexibleJobRunner()
+ps=Process("p2", "Process Two")
 ps.activities.append(two)
 ps.activities.append(three)
+ps.activities.append(four)
+ps.activities.append(five)
 
 print("ps="+str(ps) )
 
-job=ps.createJob(111, "FirstJob")
-
-print("About to run simple job")
-
-runner = BetterJobRunner()
+job=ps.createJob(111, "SecondJob")
 runner.executeJob(job)
 
 
