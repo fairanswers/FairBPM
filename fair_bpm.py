@@ -23,6 +23,7 @@ class Activity(Pretty):
         READY='READY'
         COMPLETE='COMPLETE'
         ERROR = 'ERROR'
+        
 
     class Returned(Pretty):
         TRUE=True
