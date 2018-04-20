@@ -18,16 +18,24 @@ class O(Pretty):
 
 
 class Activity(Pretty):
-    WAITING='WAITING'
-    READY='READY'
-    COMPLETE='COMPLETE'
+    class State(Pretty):
+        WAITING='WAITING'
+        READY='READY'
+        COMPLETE='COMPLETE'
+        ERROR = 'ERROR'
+
+    class Returned(Pretty):
+        TRUE=True
+        FALSE=False
+        ANY='ANY'
+
     def __init__(self, id, name):
         def __init__(self, id=-1, name='unknown'):
             O.__init__(self, id=-1, name=name)
         self.id = id
         self.name = name
         self.parents=[]
-        self.state=Activity.WAITING
+        self.state=Activity.State.WAITING
 
     def addParent(self, parent):
         if type(parent) is str:
@@ -76,7 +84,7 @@ class Job(Pretty):
         children=[]
         aid=activity.id
         for act in self.activities:
-            if act.state != Activity.COMPLETE and aid in act.parents:
+            if act.state != Activity.State.COMPLETE and aid in act.parents:
                 children.append(act)
         return children
 
@@ -92,7 +100,7 @@ class BetterJobRunner(Pretty):
         print("Better Job Runner.  Start with the one with no parents. "+str(job.name) )
         first_activity=job.getFirstActivity()
         first_activity.execute()
-        first_activity.state=Activity.COMPLETE
+        first_activity.state=Activity.State.COMPLETE
         tasksLeft=True
         while tasksLeft:
             activities=job.findChildren(first_activity)
@@ -101,7 +109,7 @@ class BetterJobRunner(Pretty):
             else:
                 for act in activities:
                     act.execute()
-                    act.state=Activity.COMPLETE
+                    act.state=Activity.State.COMPLETE
 
 class FlexibleJobRunner(Pretty):
     def executeJob(self, job):
@@ -110,25 +118,25 @@ class FlexibleJobRunner(Pretty):
         while self.hasReadyActivities(job):
             act = self.findReadyActivity(job)
             act.execute()
-            act.state=Activity.COMPLETE
+            act.state=Activity.State.COMPLETE
             nextReady = job.findChildren(act)
             for nr in nextReady:
-                nr.state = Activity.READY
+                nr.state = Activity.State.READY
 
     def setAllParentlessActivityToReady(self, job):
         for act in job.activities:
             if len(act.parents) == 0:
-                act.state=Activity.READY
+                act.state=Activity.State.READY
 
     def hasReadyActivities(self, job):
         for act in job.activities:
-            if act.state == Activity.READY:
+            if act.state == Activity.State.READY:
                 return True
         return False
 
     def findReadyActivity(self, job):
         for act in job.activities:
-            if act.state == Activity.READY:
+            if act.state == Activity.State.READY:
                 return act
 
 print "SFSG"
