@@ -28,6 +28,7 @@ class Activity(Pretty):
         TRUE=True
         FALSE=False
         ANY='ANY'
+        ERROR='ERROR' # Do we need this?
 
     def __init__(self, id, name):
         def __init__(self, id=-1, name='unknown'):
@@ -36,12 +37,26 @@ class Activity(Pretty):
         self.name = name
         self.parents=[]
         self.state=Activity.State.WAITING
+        self.returned=None
+
+    def isParent(self, aid, ret_val):
+        for p in self.parents:
+            if p[0] is aid and p[1] is ret_val:
+                return True
+            else:
+                return False
 
     def addParent(self, parent):
+        # Check for a string.  If so, assume ANY Returned
         if type(parent) is str:
-            self.parents.append(parent)
-        else:
-            self.parents.append(parent.id)
+            self.parents.append([parent, Activity.Returned.ANY])
+        # Check for a list.  if so, add the first and second items as parent.
+        if type(list):
+            # Check for string
+            if parent[0] is str:
+                self.parents.append([parent[0], parent[1] ] )
+            # Need to raise error if we ever get here, or inthe outer 'else' from here
+
 
     def execute(self):
         print("In Activity Execute. id="+self.id+" name="+self.name)
@@ -84,32 +99,9 @@ class Job(Pretty):
         children=[]
         aid=activity.id
         for act in self.activities:
-            if act.state != Activity.State.COMPLETE and aid in act.parents:
+            if act.state != Activity.State.COMPLETE and act.isParent(aid, activity.returned):
                 children.append(act)
         return children
-
-
-class SimpleJobRunner(Pretty):
-    def executeJob(self, job):
-        print("Starting job for SimpleJobRunner.  Run all activites. "+str(job.name) )
-        for act in job.activities:
-            act.execute()
-
-class BetterJobRunner(Pretty):
-    def executeJob(self, job):
-        print("Better Job Runner.  Start with the one with no parents. "+str(job.name) )
-        first_activity=job.getFirstActivity()
-        first_activity.execute()
-        first_activity.state=Activity.State.COMPLETE
-        tasksLeft=True
-        while tasksLeft:
-            activities=job.findChildren(first_activity)
-            if not activities:
-                tasksLeft=False
-            else:
-                for act in activities:
-                    act.execute()
-                    act.state=Activity.State.COMPLETE
 
 class FlexibleJobRunner(Pretty):
     def executeJob(self, job):
@@ -143,11 +135,11 @@ print "SFSG"
 
 two=Say("id22", "The Say Activity")
 three=Sing("id33", "The Sing Activity")
-three.addParent(two)
+three.addParent(two.id)
 four=Say("id44", "The Second Say Activity")
-four.addParent(two)
+four.addParent(two.id)
 five=Say("id55", "The Second Sing Activity")
-five.addParent(two)
+five.addParent(two.id)
 
 runner = FlexibleJobRunner()
 ps=Process("p2", "Process Two")
@@ -160,5 +152,4 @@ print("ps="+str(ps) )
 
 job=ps.createJob(111, "SecondJob")
 runner.executeJob(job)
-
 
