@@ -23,7 +23,7 @@ class Activity(Pretty):
         READY='READY'
         COMPLETE='COMPLETE'
         ERROR = 'ERROR'
-        
+
 
     class Returned(Pretty):
         TRUE=True
@@ -42,7 +42,7 @@ class Activity(Pretty):
 
     def isParent(self, aid, ret_val):
         for p in self.parents:
-            if p[0] is aid and p[1] is ret_val:
+            if p[0] is aid and (p[1] is ret_val or p[1] == Activity.Returned.ANY):
                 return True
             else:
                 return False
@@ -52,7 +52,7 @@ class Activity(Pretty):
         if type(parent) is str:
             self.parents.append([parent, Activity.Returned.ANY])
         # Check for a list.  if so, add the first and second items as parent.
-        if type(list):
+        if type(parent) is list:
             # Check for string
             if parent[0] is str:
                 self.parents.append([parent[0], parent[1] ] )
@@ -65,10 +65,12 @@ class Activity(Pretty):
 class Say(Activity):
     def execute(self):
         print("In Say " +self.name)
+        self.returned=Activity.Returned.TRUE
 
 class Sing(Activity):
     def execute(self):
         print("In Sing "+ self.name)
+        self.returned=Activity.Returned.TRUE
 
 class Process(Pretty):
     def __init__(self, id, name):
