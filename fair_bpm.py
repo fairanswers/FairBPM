@@ -38,7 +38,7 @@ class Activity(Pretty):
         self.name = name
         self.parents=[]
         self.state=Activity.State.WAITING
-        self.returned=None
+        self.returned=self.Returned.ANY
 
     def isParent(self, aid, ret_val):
         for p in self.parents:
@@ -65,12 +65,10 @@ class Activity(Pretty):
 class Say(Activity):
     def execute(self):
         print("In Say " +self.name)
-        self.returned=Activity.Returned.TRUE
 
 class Sing(Activity):
     def execute(self):
         print("In Sing "+ self.name)
-        self.returned=Activity.Returned.TRUE
 
 class Process(Pretty):
     def __init__(self, id, name):
