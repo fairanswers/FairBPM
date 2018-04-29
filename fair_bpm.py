@@ -3,7 +3,11 @@
 #import utest
 import copy
 
-class Pretty(object):
+class O(object):
+  def __init__(i, **adds): i.__dict__.update(adds)
+
+
+class Pretty(O):
     def __repr__(i):
         return i.__class__.__name__ + kv(i.__dict__)
 
@@ -12,10 +16,6 @@ def kv(d):
                               for k in sorted(d.keys())
                               if k[0] != "_"]) + ')'
 
-class O(Pretty):
-  def __init__(i, **adds): i.__dict__.update(adds)
-
-
 
 class Activity(Pretty):
     class State(Pretty):
@@ -23,7 +23,6 @@ class Activity(Pretty):
         READY='READY'
         COMPLETE='COMPLETE'
         ERROR = 'ERROR'
-
 
     class Returned(Pretty):
         TRUE=True
@@ -39,6 +38,13 @@ class Activity(Pretty):
         self.parents=[]
         self.state=Activity.State.WAITING
         self.returned=self.Returned.ANY
+
+    def to_dot(self):
+        c= self.__class__
+        dot = '  {} [ class = {} name = "{}" state = "{}" returned = "{}" ] \n'.format( self.id, self.__class__.__name__, self.name, self.state, self.returned)
+        for p in self.parents:
+            dot = dot + '{} -> {} \n'.format(p[0], self.id)
+        return dot
 
     def isParent(self, aid, ret_val):
         for p in self.parents:
@@ -58,17 +64,19 @@ class Activity(Pretty):
                 self.parents.append([parent[0], parent[1] ] )
             # Need to raise error if we ever get here, or inthe outer 'else' from here
 
-
     def execute(self):
         print("In Activity Execute. id="+self.id+" name="+self.name)
+
 
 class Say(Activity):
     def execute(self):
         print("In Say " +self.name)
 
+
 class Sing(Activity):
     def execute(self):
         print("In Sing "+ self.name)
+
 
 class Process(Pretty):
     def __init__(self, id, name):
@@ -79,16 +87,25 @@ class Process(Pretty):
         self.name = name
         self.activities=[]
 
+    def to_dot(self):
+        dot= 'digraph {} '.format(self.name)
+        for act in self.activities:
+            dot = dot + act.to_dot()
+
+        dot = dot + ']\n'
+        return dot
+
     def createJob(self, id, name):
         job = Job(id, name, self)
         return job
 
-class Job(Pretty):
+class Job(Process):
     def __init__(self, id, name, process):
         self.id=id
         self.name=name
         self.process=process
         self.activities=copy.deepcopy(process.activities)
+
 
     def getFirstActivity(self):
         for act in self.activities:
@@ -151,6 +168,9 @@ ps.activities.append(five)
 
 print("ps="+str(ps) )
 
+print ("to_dot"+five.to_dot() )
 job=ps.createJob(111, "SecondJob")
 runner.executeJob(job)
+print('ps.to_dot'+ps.to_dot() )
+print('job.to_dot'+job.to_dot() )
 
