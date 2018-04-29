@@ -3,6 +3,7 @@
 #import utest
 import copy
 
+
 class O(object):
   def __init__(i, **adds): i.__dict__.update(adds)
 
