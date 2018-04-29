@@ -38,10 +38,15 @@ class Activity(Pretty):
         self.parents=[]
         self.state=Activity.State.WAITING
         self.returned=self.Returned.ANY
+        self.color={}
+        self.color[self.State.WAITING]='WHITE'
+        self.color[self.State.READY]='YELLOW'
+        self.color[self.State.COMPLETE]='GREEN'
+        self.color[self.State.ERROR]='RED'
 
     def to_dot(self):
         c= self.__class__
-        dot = '  {} [ class = {} name = "{}" state = "{}" returned = "{}" ] \n'.format( self.id, self.__class__.__name__, self.name, self.state, self.returned)
+        dot = '  {} [ class = {} name = "{}" state = "{}" returned = "{}" color={} style=filled] \n'.format( self.id, self.__class__.__name__, self.name, self.state, self.returned, self.color[self.state])
         for p in self.parents:
             dot = dot + '{} -> {} \n'.format(p[0], self.id)
         return dot
@@ -88,11 +93,11 @@ class Process(Pretty):
         self.activities=[]
 
     def to_dot(self):
-        dot= 'digraph {} '.format(self.name)
+        dot= 'digraph {} '.format(self.name) + "{"
         for act in self.activities:
             dot = dot + act.to_dot()
 
-        dot = dot + ']\n'
+        dot = dot + '}\n'
         return dot
 
     def createJob(self, id, name):
