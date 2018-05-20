@@ -2,6 +2,7 @@
 
 #import utest
 import copy
+from dot_tools import parse
 
 
 class O(object):
@@ -129,7 +130,7 @@ class Job(Process):
 
 class FlexibleJobRunner(Pretty):
     def executeJob(self, job):
-        print "Flexible Job Runner.  Handle multiple starts and runs multiple children."
+        print("Flexible Job Runner.  Handle multiple starts and runs multiple children.")
         self.setAllParentlessActivityToReady(job)
         while self.hasReadyActivities(job):
             act = self.findReadyActivity(job)
@@ -155,7 +156,7 @@ class FlexibleJobRunner(Pretty):
             if act.state == Activity.State.READY:
                 return act
 
-print "SFSG"
+print("SFSG")
 
 two=Say("id22", "The Say Activity")
 three=Sing("id33", "The Sing Activity")
@@ -180,3 +181,11 @@ runner.executeJob(job)
 print('ps.to_dot'+ps.to_dot() )
 print('job.to_dot'+job.to_dot() )
 
+tree = parse(job.to_dot())
+print tree
+
+from dot_tools.dot_graph import SimpleGraph
+
+g = SimpleGraph.build(tree.kid('Graph'))
+print g.nodes
+print g.edges
