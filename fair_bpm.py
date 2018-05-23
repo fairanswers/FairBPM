@@ -1,9 +1,9 @@
 #!/usr/bin/python
-
-#import utest
 import copy
+import os
 from dot_tools import parse
-
+from dot_tools.dot_graph import SimpleGraph
+import time
 
 class O(object):
   def __init__(i, **adds): i.__dict__.update(adds)
@@ -106,9 +106,21 @@ class Process(Pretty):
         job = Job(id, name, self)
         return job
 
+    @classmethod
+    def parse(cls, dot):
+        tree = parse(dot)
+        print(tree)
+
+        g = SimpleGraph.build(tree.kid('Graph'))
+        print(g.nodes)
+        print(g.edges)
+        #Name and ID?
+        
+
+
 class Job(Process):
     def __init__(self, id, name, process):
-        self.id=id
+        self.id=time.time()
         self.name=name
         self.process=process
         self.activities=copy.deepcopy(process.activities)
@@ -156,36 +168,39 @@ class FlexibleJobRunner(Pretty):
             if act.state == Activity.State.READY:
                 return act
 
-print("SFSG")
+class dot_data_store(Pretty):
 
-two=Say("id22", "The Say Activity")
-three=Sing("id33", "The Sing Activity")
-three.addParent(two.id)
-four=Say("id44", "The Second Say Activity")
-four.addParent(two.id)
-five=Say("id55", "The Second Sing Activity")
-five.addParent(two.id)
+    def save(self, dot):
+        pass
 
-runner = FlexibleJobRunner()
-ps=Process("p2", "Process Two")
-ps.activities.append(two)
-ps.activities.append(three)
-ps.activities.append(four)
-ps.activities.append(five)
+    def get(self, id):
+        pass
 
-print("ps="+str(ps) )
+    def delete(self, id):
+        pass
 
-print ("to_dot"+five.to_dot() )
-job=ps.createJob(111, "SecondJob")
-runner.executeJob(job)
-print('ps.to_dot'+ps.to_dot() )
-print('job.to_dot'+job.to_dot() )
+    def list(self):
+        pass
 
-tree = parse(job.to_dot())
-print tree
+class file_dot_data_store(dot_data_store):
+    store_dir="archive"
 
-from dot_tools.dot_graph import SimpleGraph
+    def __init__(self):
+        os.makedirs(self.store_dir, 'w', True)
 
-g = SimpleGraph.build(tree.kid('Graph'))
-print g.nodes
-print g.edges
+    def save(self, dot):
+        with open(dot.name, 'w') as f:
+            f.write(dot.to_dot() )
+
+    def get(self, name):
+        with open(name) as f:
+            f.read(name)
+
+    def delete(self, id):
+        pass
+
+    def list(self):
+        pass
+
+
+
