@@ -83,6 +83,7 @@ class Activity(Pretty):
 
     def execute(self):
         print("In Activity Execute. id="+self.id+" name="+self.name)
+        raise TypeError("Activity.execute should always be overridden, but is being invoked directly. id="+self.id+" name="+self.name)
 
 
 class Say(Activity):
@@ -218,5 +219,5 @@ if __name__ == '__main__':
     say=fair_bpm_test.say()
     sing=fair_bpm_test.sing()
     ps = fair_bpm_test.process()
-    fair_bpm_test.test_is_parent(say, sing)
+    fair_bpm_test.test_dot_tools(ps)
 

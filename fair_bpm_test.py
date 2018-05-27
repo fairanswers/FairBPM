@@ -37,6 +37,8 @@ def test_dot_tools(process):
     g = SimpleGraph.build(tree.kid('Graph'))
     assert len(g.nodes) == 4
     assert len(g.edges) == 3
+    assert g.nodes['id44']['state'] == 'COMPLETE'
+
 
 def test_run_job(process):
     ps = process
