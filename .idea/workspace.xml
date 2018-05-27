@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/fair_bpm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fair_bpm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fair_bpm.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm.py" afterDir="false" />
@@ -18,12 +17,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file leaf-file-name="fair_bpm_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-125">
-              <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+            <state relative-caret-position="461">
+              <caret line="67" selection-start-line="67" selection-end-line="67" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -34,8 +33,8 @@
       <file leaf-file-name="fair_bpm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fair_bpm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="203" lean-forward="true" selection-start-line="203" selection-end-line="203" />
+            <state relative-caret-position="329">
+              <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
               <folding>
                 <element signature="e#18#29#0" expanded="true" />
               </folding>
@@ -62,6 +61,9 @@
     <findStrings>
       <find>print</find>
       <find>parse</find>
+      <find>isParent</find>
+      <find>is_p</find>
+      <find>is_</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -77,9 +79,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="10" />
-    <option name="y" value="48" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="899" />
+    <option name="y" value="160" />
     <option name="width" value="1006" />
     <option name="height" value="666" />
   </component>
@@ -104,7 +106,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/venv" />
-    <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.python" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -212,26 +214,46 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="48" width="1006" height="666" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24950299" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15729167" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.500994" side_tool="true" weight="0.32844037" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49900597" visible="true" weight="0.32844037" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.500994" side_tool="true" weight="0.32844037" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49900597" weight="0.32837406" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" weight="0.4" />
-      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" visible="true" weight="0.30074388" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49900597" weight="0.32844037" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1574251" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" visible="true" weight="0.2853437" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.500994" side_tool="true" weight="0.32844037" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -244,18 +266,58 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fair_bpm_test.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>151</line>
-          <option name="timeStamp" value="4" />
+          <line>59</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fair_bpm_test.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="5" />
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="19" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fair_bpm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3451">
+          <caret line="203" lean-forward="true" selection-start-line="203" selection-end-line="203" />
+          <folding>
+            <element signature="e#18#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fair_bpm.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -310,16 +372,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utest.py" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/bin/treedot">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="23" column="34" lean-forward="true" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/bin/treedot" />
     <entry file="file://$PROJECT_DIR$/pytest.ini.py" />
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -329,10 +382,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-125">
-          <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+        <state relative-caret-position="461">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -341,8 +397,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fair_bpm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="203" lean-forward="true" selection-start-line="203" selection-end-line="203" />
+        <state relative-caret-position="329">
+          <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
           <folding>
             <element signature="e#18#29#0" expanded="true" />
           </folding>

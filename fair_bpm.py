@@ -53,23 +53,33 @@ class Activity(Pretty):
             dot = dot + '{} -> {} \n'.format(p[0], self.id)
         return dot
 
-    def isParent(self, aid, ret_val):
+    def has_parent(self, aid, ret_val):
+        if isinstance(aid, Activity):
+            aid=aid.id
         for p in self.parents:
             if p[0] is aid and (p[1] is ret_val or p[1] == Activity.Returned.ANY):
                 return True
-            else:
-                return False
+        return False
 
-    def addParent(self, parent):
-        # Check for a string.  If so, assume ANY Returned
-        if type(parent) is str:
-            self.parents.append([parent, Activity.Returned.ANY])
+    def add_parent(self, parent):
         # Check for a list.  if so, add the first and second items as parent.
         if type(parent) is list:
+            if type(parent[0]) is Activity:
+                parent[0]=parent[0].id
             # Check for string
             if parent[0] is str:
                 self.parents.append([parent[0], parent[1] ] )
+                return
+        # Check for a string.  If so, assume ANY Returned
+        if type(parent) is str:
+            self.parents.append([parent, Activity.Returned.ANY])
+            return
+        # Check for activity, assume ANY
+        if isinstance(parent, Activity):
+            self.add_parent(parent.id)
+            return
             # Need to raise error if we ever get here, or inthe outer 'else' from here
+        raise TypeError("Parent in add_parent must be string or Activity")
 
     def execute(self):
         print("In Activity Execute. id="+self.id+" name="+self.name)
@@ -126,44 +136,44 @@ class Job(Process):
         self.activities=copy.deepcopy(process.activities)
 
 
-    def getFirstActivity(self):
+    def get_first_activity(self):
         for act in self.activities:
             if len(act.parents) == 0:
                 return act
         raise Exception("Can't find first activity")
 
-    def findChildren(self, activity):
+    def find_children(self, activity):
         children=[]
         aid=activity.id
         for act in self.activities:
-            if act.state != Activity.State.COMPLETE and act.isParent(aid, activity.returned):
+            if act.state != Activity.State.COMPLETE and act.has_parent(aid, activity.returned):
                 children.append(act)
         return children
 
 class FlexibleJobRunner(Pretty):
-    def executeJob(self, job):
+    def execute_job(self, job):
         print("Flexible Job Runner.  Handle multiple starts and runs multiple children.")
-        self.setAllParentlessActivityToReady(job)
-        while self.hasReadyActivities(job):
-            act = self.findReadyActivity(job)
+        self.set_all_parentless_activity_to_ready(job)
+        while self.has_ready_activities(job):
+            act = self.find_ready_activity(job)
             act.execute()
             act.state=Activity.State.COMPLETE
-            nextReady = job.findChildren(act)
+            nextReady = job.find_children(act)
             for nr in nextReady:
                 nr.state = Activity.State.READY
 
-    def setAllParentlessActivityToReady(self, job):
+    def set_all_parentless_activity_to_ready(self, job):
         for act in job.activities:
             if len(act.parents) == 0:
                 act.state=Activity.State.READY
 
-    def hasReadyActivities(self, job):
+    def has_ready_activities(self, job):
         for act in job.activities:
             if act.state == Activity.State.READY:
                 return True
         return False
 
-    def findReadyActivity(self, job):
+    def find_ready_activity(self, job):
         for act in job.activities:
             if act.state == Activity.State.READY:
                 return act
@@ -202,4 +212,11 @@ class file_dot_data_store(dot_data_store):
     def list(self):
         pass
 
+
+if __name__ == '__main__':
+    import fair_bpm_test
+    say=fair_bpm_test.say()
+    sing=fair_bpm_test.sing()
+    ps = fair_bpm_test.process()
+    fair_bpm_test.test_is_parent(say, sing)
 

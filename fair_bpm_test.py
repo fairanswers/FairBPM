@@ -6,21 +6,21 @@ import fair_bpm
 
 @pytest.fixture()
 def say():
-    Say("id22", "The Say Activity")
+    return Say("id22", "The Say Activity")
 
 @pytest.fixture()
 def sing():
-    Sing("id33", "The Sing Activity")
+    return Sing("id33", "The Sing Activity")
 
 @pytest.fixture()
 def process():
     two = Say("id22", "The Say Activity")
     three = Sing("id33", "The Sing Activity")
-    three.addParent(two.id)
+    three.add_parent(two.id)
     four = Say("id44", "The Second Say Activity")
-    four.addParent(two.id)
+    four.add_parent(two.id)
     five = Say("id55", "The Second Sing Activity")
-    five.addParent(two.id)
+    five.add_parent(two.id)
     ps = Process("p2", "Process Two")
     ps.activities.append(two)
     ps.activities.append(three)
@@ -31,7 +31,7 @@ def process():
 def test_dot_tools(process):
     runner = FlexibleJobRunner()
     job = process.createJob(111, "SecondJob")
-    runner.executeJob(job)
+    runner.execute_job(job)
     tree = parse(job.to_dot())
     assert len(str(tree)) > 10
     g = SimpleGraph.build(tree.kid('Graph'))
@@ -46,11 +46,32 @@ def test_run_job(process):
     print("ps=" + str(ps))
 
     job = ps.createJob(111, "SecondJob")
-    runner.executeJob(job)
+    runner.execute_job(job)
     tree = parse(job.to_dot())
     g = SimpleGraph.build(tree.kid('Graph'))
     for node in g.nodes:
-        print("Node -> "+str(node.attrs))
-#        assert node['state'] == 'COMPLETE'
+        print("Node -> "+str(node))
+        assert node['state'] == 'COMPLETE'
 
+def test_to_dot(say):
+    output = say.to_dot()
+    print(output)
+    assert len(output) > 50
 
+def test_is_parent(say, sing):
+    assert len(say.parents) == 0
+    assert len(sing.parents) == 0
+    sing.add_parent(say)
+    say.returned=fair_bpm.Activity.Returned.ANY
+    assert len(sing.parents) == 1
+    assert False == say.has_parent(sing, fair_bpm.Activity.Returned.ANY)
+    assert True  == sing.has_parent(say, fair_bpm.Activity.Returned.ANY)
+
+def test_is_parent_conditional(say, sing):
+    assert len(say.parents) == 0
+    assert len(sing.parents) == 0
+    sing.add_parent(say)
+    assert len(sing.parents) == 1
+    say.returned=fair_bpm.Activity.Returned.TRUE
+    assert True  == sing.has_parent(say.id, fair_bpm.Activity.Returned.TRUE)
+    assert True  == sing.has_parent(say.id, fair_bpm.Activity.Returned.ANY)
