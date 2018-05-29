@@ -21,7 +21,7 @@ def process():
     four.add_parent(two.id)
     five = Say("id55", "The Second Sing Activity")
     five.add_parent(two.id)
-    ps = Process("p2", "Process Two")
+    ps = Process("Process_Two")
     ps.activities.append(two)
     ps.activities.append(three)
     ps.activities.append(four)
@@ -77,3 +77,18 @@ def test_is_parent_conditional(say, sing):
     say.returned=fair_bpm.Activity.Returned.TRUE
     assert True  == sing.has_parent(say.id, fair_bpm.Activity.Returned.TRUE)
     assert True  == sing.has_parent(say.id, fair_bpm.Activity.Returned.ANY)
+
+
+def test_file_store(process):
+    name=process.id
+    data=process.to_dot()
+    store=fair_bpm.file_dot_data_store()
+    # assert len(store.list() )==0
+    out=store.save(process)
+    loaded=store.load(name)
+    assert loaded.to_dot() == process.to_dot()
+
+def test_parse_activity_from_dot():
+    d={'asdf':'qwerty'}
+    act=fair_bpm.Activity.parse_from_dot('bbb',d)
+    assert act.asdf == 'qwerty'

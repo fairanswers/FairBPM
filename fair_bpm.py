@@ -32,7 +32,14 @@ class Activity(Pretty):
         ANY='ANY'
         ERROR='ERROR' # Do we need this?
 
-    def __init__(self, id, name):
+    #Pretty sure this will need some work.  Skipping for now
+    class StateColor(Pretty):
+        WAITING='WHITE'
+        READY='YELLOW'
+        COMPLETE='GREEN'
+        ERROR='RED'
+
+    def __init__(self, id=-1, name='unknown'):
         def __init__(self, id=-1, name='unknown'):
             O.__init__(self, id=-1, name=name)
         self.id = id
@@ -40,15 +47,11 @@ class Activity(Pretty):
         self.parents=[]
         self.state=Activity.State.WAITING
         self.returned=self.Returned.ANY
-        self.color={}
-        self.color[self.State.WAITING]='WHITE'
-        self.color[self.State.READY]='YELLOW'
-        self.color[self.State.COMPLETE]='GREEN'
-        self.color[self.State.ERROR]='RED'
+        self.color=self.StateColor.WAITING
 
     def to_dot(self):
         c= self.__class__
-        dot = '  {} [ class = {} name = "{}" state = "{}" returned = "{}" color={} style=filled] \n'.format( self.id, self.__class__.__name__, self.name, self.state, self.returned, self.color[self.state])
+        dot = '  {} [ class = {} name = "{}" state = "{}" returned = "{}" color={} style=filled] \n'.format( self.id, self.__class__.__name__, self.name, self.state, self.returned, self.color)
         for p in self.parents:
             dot = dot + '{} -> {} \n'.format(p[0], self.id)
         return dot
@@ -78,12 +81,18 @@ class Activity(Pretty):
         if isinstance(parent, Activity):
             self.add_parent(parent.id)
             return
-            # Need to raise error if we ever get here, or inthe outer 'else' from here
-        raise TypeError("Parent in add_parent must be string or Activity")
+            # Need to raise error if we ever load here, or inthe outer 'else' from here
+        raise TypeError("Parent in add_parent must be string, Activity, or list of activit and condition")
 
     def execute(self):
-        print("In Activity Execute. id="+self.id+" name="+self.name)
         raise TypeError("Activity.execute should always be overridden, but is being invoked directly. id="+self.id+" name="+self.name)
+
+    @classmethod
+    def parse_from_dot(cls, id, fields):
+        act=Activity(id)
+        for key in fields:
+            act.__setattr__(str(key),str(fields[key]))
+        return act
 
 
 class Say(Activity):
@@ -97,45 +106,51 @@ class Sing(Activity):
 
 
 class Process(Pretty):
-    def __init__(self, id, name):
-        print("Init Process")
-        def __init__(self, id=-1, name='unknown'):
-            O.__init__(self, id=-1, name=name)
+    def __init__(self, id):
+        def __init__(self, id=-1 ):
+            O.__init__(self, id=-1)
         self.id = id
-        self.name = name
         self.activities=[]
 
     def to_dot(self):
-        dot= 'digraph {} '.format(self.name) + "{"
+        dot= 'digraph {} '.format(self.id) + "{"
         for act in self.activities:
             dot = dot + act.to_dot()
-
         dot = dot + '}\n'
         return dot
 
-    def createJob(self, id, name):
-        job = Job(id, name, self)
+    def createJob(self, id):
+        job = Job(id, self)
         return job
+
+    @classmethod
+    def parse_to_simple_graph(cls, dot):
+        tree = parse(dot)
+        g = SimpleGraph.build(tree.kid('Graph'))
+        return g
 
     @classmethod
     def parse(cls, dot):
         tree = parse(dot)
-        print(tree)
-
+        id=tree.kid('Graph').children[1].label
         g = SimpleGraph.build(tree.kid('Graph'))
-        print(g.nodes)
-        print(g.edges)
-        #Name and ID?
-        
+        ps=Process(id)
+        for node in g.nodes:
+            ps.activities.append(Activity.parse_from_dot(node, g.nodes[node]))
+        for edge in g.edges:
+            act=next((x for x in ps.activities if x.id == edge[1]), None)
+            # if none throw error
+            act.add_parent(edge[0])
+
+
+        return ps
 
 
 class Job(Process):
-    def __init__(self, id, name, process):
+    def __init__(self, id, process):
         self.id=time.time()
-        self.name=name
         self.process=process
         self.activities=copy.deepcopy(process.activities)
-
 
     def get_first_activity(self):
         for act in self.activities:
@@ -153,7 +168,6 @@ class Job(Process):
 
 class FlexibleJobRunner(Pretty):
     def execute_job(self, job):
-        print("Flexible Job Runner.  Handle multiple starts and runs multiple children.")
         self.set_all_parentless_activity_to_ready(job)
         while self.has_ready_activities(job):
             act = self.find_ready_activity(job)
@@ -184,7 +198,7 @@ class dot_data_store(Pretty):
     def save(self, dot):
         pass
 
-    def get(self, id):
+    def load(self, id):
         pass
 
     def delete(self, id):
@@ -194,24 +208,35 @@ class dot_data_store(Pretty):
         pass
 
 class file_dot_data_store(dot_data_store):
-    store_dir="archive"
+    store_dir=""
+    extention=".dot"
 
-    def __init__(self):
-        os.makedirs(self.store_dir, 'w', True)
+    def __init__(self, dir=os.getcwd()+os.sep+"dot_archive"):
+        self.store_dir=dir
+        if not os.path.exists(self.store_dir):
+            os.makedirs(self.store_dir)
+        if not os.access(self.store_dir, os.W_OK):
+            raise IOError("Can't write to archive directory "+self.store_dir)
 
     def save(self, dot):
-        with open(dot.name, 'w') as f:
+        filename=self.store_dir + os.sep + dot.id + self.extention
+        with open(filename, 'w') as f:
             f.write(dot.to_dot() )
 
-    def get(self, name):
-        with open(name) as f:
-            f.read(name)
+    def load(self, id):
+        filename=self.store_dir+os.sep+id+self.extention
+        with open(filename) as f:
+            dot=f.read()
+        ps= Process.parse(dot)
+        return ps
+
 
     def delete(self, id):
         pass
 
     def list(self):
-        pass
+        cont=os.listdir(self.store_dir)
+        return cont
 
 
 if __name__ == '__main__':
@@ -219,5 +244,6 @@ if __name__ == '__main__':
     say=fair_bpm_test.say()
     sing=fair_bpm_test.sing()
     ps = fair_bpm_test.process()
-    fair_bpm_test.test_dot_tools(ps)
+    fair_bpm_test.test_parse_activity_from_dot()
+    fair_bpm_test.test_file_store(ps)
 
