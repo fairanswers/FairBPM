@@ -211,6 +211,10 @@ class file_dot_data_store(dot_data_store):
     store_dir=""
     extention=".dot"
 
+    def filename_from_id(self, id):
+        filename = self.store_dir + os.sep + id + self.extention
+        return filename
+
     def __init__(self, dir=os.getcwd()+os.sep+"dot_archive"):
         self.store_dir=dir
         if not os.path.exists(self.store_dir):
@@ -219,20 +223,21 @@ class file_dot_data_store(dot_data_store):
             raise IOError("Can't write to archive directory "+self.store_dir)
 
     def save(self, dot):
-        filename=self.store_dir + os.sep + dot.id + self.extention
+        filename=self.filename_from_id(dot.id)
         with open(filename, 'w') as f:
             f.write(dot.to_dot() )
 
     def load(self, id):
-        filename=self.store_dir+os.sep+id+self.extention
+        filename = self.filename_from_id(id)
         with open(filename) as f:
             dot=f.read()
         ps= Process.parse(dot)
         return ps
 
-
     def delete(self, id):
-        pass
+        filename = self.filename_from_id(id)
+        os.remove(filename)
+        return True
 
     def list(self):
         cont=os.listdir(self.store_dir)
