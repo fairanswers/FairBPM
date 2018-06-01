@@ -247,21 +247,16 @@ class file_dot_data_store(dot_data_store):
         cont=os.listdir(self.store_dir)
         return cont
 
-# @app.route("/list")
-# def list():
-#     list=store.list()
-#     page=jsonify(list)
-#     return page
-
-@app.route("/dot_list/", methods = ['GET'])
-def dot_list():
-    list=store.list()
-    page=jsonify(list)
-    return page
 
 @app.route("/dot/<string:id>/", methods = ['GET', 'POST', 'DELETE'])
-def dot_edit(id):
+@app.route("/dot/", defaults={'id': None} , methods = ['GET'])
+def dot_edit(id=None):
     if request.method == 'GET':
+        if id == None:
+            list=store.list()
+            page=jsonify(list)
+            return page
+
         file=store.load(id)
         return file.to_dot()
     if request.method == 'POST':
@@ -273,13 +268,6 @@ def dot_edit(id):
         store.delete(str(id))
         return "Ok"
 
-
-# @app.route("/get/<string:file>/")
-# def create(file):
-#     # Parse it for errors
-#     ps = Process.parse(file)
-#     store.save(file)
-#     return file.to_dot()
 
 store=file_dot_data_store()
 
