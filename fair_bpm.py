@@ -4,6 +4,9 @@ import os
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
 import time
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
 
 class O(object):
   def __init__(i, **adds): i.__dict__.update(adds)
@@ -226,6 +229,7 @@ class file_dot_data_store(dot_data_store):
         filename=self.filename_from_id(dot.id)
         with open(filename, 'w') as f:
             f.write(dot.to_dot() )
+            return dot
 
     def load(self, id):
         filename = self.filename_from_id(id)
@@ -243,12 +247,49 @@ class file_dot_data_store(dot_data_store):
         cont=os.listdir(self.store_dir)
         return cont
 
+# @app.route("/list")
+# def list():
+#     list=store.list()
+#     page=jsonify(list)
+#     return page
+
+@app.route("/dot_list/", methods = ['GET'])
+def dot_list():
+    list=store.list()
+    page=jsonify(list)
+    return page
+
+@app.route("/dot/<string:id>/", methods = ['GET', 'POST', 'DELETE'])
+def dot_edit(id):
+    if request.method == 'GET':
+        file=store.load(id)
+        return file.to_dot()
+    if request.method == 'POST':
+        file=request.data
+        ps = Process.parse(file)
+        store.save(ps)
+        return ps.to_dot()
+    if request.method == 'DELETE':
+        store.delete(str(id))
+        return "Ok"
+
+
+# @app.route("/get/<string:file>/")
+# def create(file):
+#     # Parse it for errors
+#     ps = Process.parse(file)
+#     store.save(file)
+#     return file.to_dot()
+
+store=file_dot_data_store()
 
 if __name__ == '__main__':
-    import fair_bpm_test
-    say=fair_bpm_test.say()
-    sing=fair_bpm_test.sing()
-    ps = fair_bpm_test.process()
-    fair_bpm_test.test_parse_activity_from_dot()
-    fair_bpm_test.test_file_store(ps)
+    print("Starting")
+    app.run(debug=True)
+    # import fair_bpm_test
+    # say=fair_bpm_test.say()
+    # sing=fair_bpm_test.sing()
+    # ps = fair_bpm_test.process()
+    # fair_bpm_test.test_parse_activity_from_dot()
+    # fair_bpm_test.test_file_store(ps)
 

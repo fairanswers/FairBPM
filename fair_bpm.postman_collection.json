@@ -1,0 +1,64 @@
+{
+	"variables": [],
+	"info": {
+		"name": "fair_bpm",
+		"_postman_id": "cbddefd1-2d9d-e4c2-afa0-dc230e0c380d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List",
+			"request": {
+				"url": "http://127.0.0.1:5000/dot/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get_one",
+			"request": {
+				"url": "http://127.0.0.1:5000/dot/one/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "save",
+			"request": {
+				"url": "http://127.0.0.1:5000/dot/one/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "type",
+						"value": "multipart/form-data",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "digraph one {  end [ class = Activity name = \"unknown\" state = \"WAITING\" returned = \"ANY\" color=WHITE style=filled] \na3 -> end \nb3 -> end \n  a0 [ class = Activity name = \"unknown\" state = \"WAITING\" returned = \"ANY\" color=WHITE style=filled] \nstart -> a0 \na3 -> a0 \n  a1 [ class = Activity name = \"unknown\" state = \"WAITING\" returned = \"ANY\" color=WHITE style=filled] \n  start [ class = Activity name = \"unknown\" state = \"WAITING\" returned = \"ANY\" color=WHITE style=filled] \n  a3 [ class = Activity name = \"unknown\" state = \"WAITING\" returned = \"ANY\" color=WHITE style=filled] \nb2 -> a3 \n  b0 [ class = Activity name = \"unknown\" state = \"WAITING\" returned = \"ANY\" color=WHITE style=filled] \nstart -> b0 \n  b2 [ class = Activity name = \"unknown\" state = \"WAITING\" returned = \"ANY\" color=WHITE style=filled] \n  b3 [ class = Activity name = \"unknown\" state = \"WAITING\" returned = \"ANY\" color=WHITE style=filled] \na1 -> b3 \n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"url": "",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
