@@ -1,0 +1,5 @@
+<!doctype html>
+<title>Hello from Flask</title>
+{% for l in list %}
+  <h1>Dot file <a href="/show/{{ l.split('.')[0] }}">{{ l.split('.')[0] }}</a></h1><br/>
+{% endfor %}

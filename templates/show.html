@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <title>Display for {{id}}</title>
+    <script src="{{url_for('static', filename='bootstrap.css')}}"></script>
+</head>
+<h1>Display for {{id}}</h1><br>
+<pre>
+{{ps.to_dot()}}
+</pre>
+
+<script src="{{url_for('static', filename='viz.js')}}"></script>
+<script src="{{url_for('static', filename='full.render.js')}}"></script>
+    <script>
+  var viz = new Viz();
+
+  viz.renderSVGElement('digraph {  end [ class = Activity name = "unknown" state = "WAITING" ] ; a3 -> end; b3 -> end  }')
+  .then(function(element) {
+    document.body.appendChild(element);
+  })
+  .catch(error => {
+    // Create a new Viz instance (@see Caveats page for more info)
+    viz = new Viz();
+
+    // Possibly display the error
+    console.error(error);
+  });
+</script>
+</body>
+</html>

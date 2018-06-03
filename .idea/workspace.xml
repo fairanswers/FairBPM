@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/fair_bpm.py" line="288" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/fair_bpm.py" line="276" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/fair_bpm.postman_collection.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front_end.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/full.render.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/viz.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/show.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fair_bpm.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fair_bpm_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm_test.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,8 +38,8 @@
       <file leaf-file-name="fair_bpm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fair_bpm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="273" selection-start-line="273" selection-end-line="273" />
+            <state relative-caret-position="138">
+              <caret line="251" selection-start-line="250" selection-end-line="251" />
               <folding>
                 <element signature="e#18#29#0" expanded="true" />
               </folding>
@@ -44,9 +47,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fair_bpm.postman_collection.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/fair_bpm.postman_collection.json">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="front_end.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front_end.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+              <folding>
+                <element signature="e#18#67#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="show.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/show.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="16" column="95" selection-start-line="16" selection-start-column="95" selection-end-line="16" selection-end-column="95" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="4" column="12" selection-end-line="4" selection-end-column="12" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="os.py" pinned="false" current-in-tab="false">
@@ -93,6 +121,7 @@
       <find>id</find>
       <find>nodes</find>
       <find>parse</find>
+      <find>&quot;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -104,8 +133,11 @@
         <option value="$PROJECT_DIR$/pytest.ini.py" />
         <option value="$PROJECT_DIR$/__init__.py" />
         <option value="$PROJECT_DIR$/fair_bpm_test.py" />
-        <option value="$PROJECT_DIR$/fair_bpm.py" />
         <option value="$PROJECT_DIR$/fair_bpm.postman_collection.json" />
+        <option value="$PROJECT_DIR$/fair_bpm.py" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/front_end.py" />
+        <option value="$PROJECT_DIR$/templates/show.html" />
       </list>
     </option>
   </component>
@@ -126,6 +158,16 @@
             <path>
               <item name="FairBPM" type="b2602c69:ProjectViewProjectNode" />
               <item name="FairBPM" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FairBPM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FairBPM" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FairBPM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FairBPM" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -159,7 +201,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.fair_bpm">
+  <component name="RunManager" selected="Python.front_end">
     <configuration name="fair_bpm" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="fair_bpm" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -191,6 +233,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fair_bpm_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="front_end" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="fair_bpm" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/front_end.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -229,9 +289,11 @@
       <item itemvalue="Python tests.bpm_pytest" />
       <item itemvalue="Python.fair_bpm" />
       <item itemvalue="Python tests.py.test in FairBPM" />
+      <item itemvalue="Python.front_end" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.front_end" />
         <item itemvalue="Python.fair_bpm" />
         <item itemvalue="Python.fair_bpm" />
       </list>
@@ -283,7 +345,21 @@
       <option name="project" value="LOCAL" />
       <updated>1527758831449</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added flask api and postman test file.&#10;Would rather that /dot/ did a list, but for now dot_list">
+      <created>1527846092735</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1527846092735</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fixed list.  Now rest compliant for /dot endpoint.">
+      <created>1527846899372</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1527846899372</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -298,17 +374,17 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15729167" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15729167" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.500994" side_tool="true" weight="0.32844037" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49900597" weight="0.32837406" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49900597" visible="true" weight="0.32837406" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" visible="true" weight="0.38575983" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" weight="0.38575983" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -345,7 +421,9 @@
     <MESSAGE value="Adding test for process complete." />
     <MESSAGE value="removed StateColor as variable assigned to each activity.  Trying to parse dot files and get same graph.  Got node ids, need to handle attributes and order, probably with a custom equals on the Process object." />
     <MESSAGE value="Got file storage done for now. Need to add api layer (flask)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Got file storage done for now. Need to add api layer (flask)" />
+    <MESSAGE value="Added flask api and postman test file.&#10;Would rather that /dot/ did a list, but for now dot_list" />
+    <MESSAGE value="Fixed list.  Now rest compliant for /dot endpoint." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed list.  Now rest compliant for /dot endpoint." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -357,18 +435,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>251</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/fair_bpm.py</url>
           <line>246</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>271</line>
+          <line>266</line>
           <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/front_end.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/front_end.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -381,7 +464,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="45" />
+      <option name="time" value="47" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -513,18 +596,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/fair_bpm.postman_collection.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/fair_bpm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="273" selection-start-line="273" selection-end-line="273" />
+        <state relative-caret-position="138">
+          <caret line="251" selection-start-line="250" selection-end-line="251" />
           <folding>
             <element signature="e#18#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fair_bpm.postman_collection.json">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front_end.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding>
+            <element signature="e#18#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/show.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="16" column="95" selection-start-line="16" selection-start-column="95" selection-end-line="16" selection-end-column="95" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
