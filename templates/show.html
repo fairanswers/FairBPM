@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Display for {{id}}</title>
-    <script src="{{url_for('static', filename='bootstrap.css')}}"></script>
+    <!--<script src="{{url_for('static', filename='bootstrap.css')}}"></script>-->
 </head>
 <h1>Display for {{id}}</h1><br>
 <pre>
@@ -14,7 +14,8 @@
     <script>
   var viz = new Viz();
 
-  viz.renderSVGElement('digraph {  end [ class = Activity name = "unknown" state = "WAITING" ] ; a3 -> end; b3 -> end  }')
+  var src = unescape(`{{ps.to_dot()|safe}}`)
+  viz.renderSVGElement(src)
   .then(function(element) {
     document.body.appendChild(element);
   })
