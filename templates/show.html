@@ -5,17 +5,51 @@
     <!--<script src="{{url_for('static', filename='bootstrap.css')}}"></script>-->
 </head>
 <h1>Display for {{id}}</h1><br>
-<pre>
+<textarea id="src" cols="90" rows="25">
 {{ps.to_dot()}}
-</pre>
+</textarea><br>
+<button type="button" onclick="render()">Render</button>
+<button type="button" onclick="save()">Save</button>
+<button type="button" onclick="list()">List</button>
+<button type="button" onclick="dot_delete()">Delete</button>
+<script>
+function dot_delete() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("DELETE", '/delete/{{id}}/', true);
+  xhr.onreadystatechange = function() {//Call a function when the state changes.
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        alert("Deleted.")
+        window.location.href = '/'
+    }
+  }
+  xhr.send('');
 
-<script src="{{url_for('static', filename='viz.js')}}"></script>
-<script src="{{url_for('static', filename='full.render.js')}}"></script>
-    <script>
-  var viz = new Viz();
+}
 
-  var src = unescape(`{{ps.to_dot()|safe}}`)
-  viz.renderSVGElement(src)
+function list() {
+  window.location.href = '/'
+}
+
+
+function save() {
+  var dot_src = document.getElementById("src").value
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", '/save/{{id}}/', true);
+  xhr.onreadystatechange = function() {//Call a function when the state changes.
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        alert("Saved.")
+        window.location.href = '/show/{{id}}/'
+    }
+  }
+  xhr.send(dot_src);
+
+}
+
+
+function render() {
+
+  var dot_src = document.getElementById("src").value
+  viz.renderSVGElement(dot_src)
   .then(function(element) {
     document.body.appendChild(element);
   })
@@ -26,6 +60,13 @@
     // Possibly display the error
     console.error(error);
   });
+}
+</script>
+<script src="{{url_for('static', filename='viz.js')}}"></script>
+<script src="{{url_for('static', filename='full.render.js')}}"></script>
+    <script>
+  var viz = new Viz();
+
 </script>
 </body>
 </html>

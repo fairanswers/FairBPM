@@ -1,17 +1,14 @@
-digraph one {
-	start -> urgent;
-	urgent -> needs_text [label=" True"]
-	needs_text -> send_text [label="True"];
-	urgent -> end [label=" False"];
-	needs_text -> send_email [label="False"];
-	send_text -> end;
-	send_email -> end;
-
-	start [shape=Mdiamond];
-	urgent[label="Is Urgent?"];
-	needs_text [label="Needs Text?"]
-	send_text[label="Send Text."]
-	send_email[label="Send Email."]
-	end [shape=Msquare];
+digraph one {  end [ class = Activity name = "unknown" state = "WAITING" returned = "ANY" color=WHITE style=filled] 
+urgent -> end 
+send_text -> end 
+send_email -> end 
+  needs_text [ class = Activity name = "unknown" state = "WAITING" returned = "ANY" color=WHITE style=filled] 
+urgent -> needs_text 
+  start [ class = Activity name = "unknown" state = "WAITING" returned = "ANY" color=WHITE style=filled] 
+  send_email [ class = Activity name = "unknown" state = "WAITING" returned = "ANY" color=WHITE style=filled] 
+needs_text -> send_email 
+  urgent [ class = Activity name = "unknown" state = "WAITING" returned = "ANY" color=WHITE style=filled] 
+start -> urgent 
+  send_text [ class = Activity name = "unknown" state = "WAITING" returned = "ANY" color=WHITE style=filled] 
+needs_text -> send_text 
 }
-
