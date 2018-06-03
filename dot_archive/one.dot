@@ -1,0 +1,17 @@
+digraph one {
+	start -> urgent;
+	urgent -> needs_text [label=" True"]
+	needs_text -> send_text [label="True"];
+	urgent -> end [label=" False"];
+	needs_text -> send_email [label="False"];
+	send_text -> end;
+	send_email -> end;
+
+	start [shape=Mdiamond];
+	urgent[label="Is Urgent?"];
+	needs_text [label="Needs Text?"]
+	send_text[label="Send Text."]
+	send_email[label="Send Email."]
+	end [shape=Msquare];
+}
+
