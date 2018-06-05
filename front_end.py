@@ -1,8 +1,9 @@
 #!/usr/bin/python
 from flask import Flask, render_template, request
-from fair_bpm import file_dot_data_store, Process
+from fair_bpm import file_dot_data_store, Process, generate_dot_runner
 app = Flask(__name__)
 store = file_dot_data_store()
+runner = generate_dot_runner()
 
 @app.route('/')
 def index():
@@ -25,6 +26,13 @@ def save(id):
     ps = Process.parse(file)
     store.save(ps)
     return ps.to_dot()
+
+@app.route("/run/", methods = ['POST'])
+def run():
+    file = request.data
+    ps = Process.parse(file)
+    result=runner.run(ps)
+    return result.to_dot()
 
 if __name__ == '__main__':
     print("Starting")

@@ -1,27 +1,27 @@
 import pytest
-from fair_bpm import Say, Sing, FlexibleJobRunner, Process
+import fair_bpm
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
 import fair_bpm
 
 @pytest.fixture()
 def say():
-    return Say("id22", "The Say Activity")
+    return fair_bpm.Say("id22", "The Say Activity")
 
 @pytest.fixture()
 def sing():
-    return Sing("id33", "The Sing Activity")
+    return fair_bpm.Sing("id33", "The Sing Activity")
 
 @pytest.fixture()
 def process():
-    two = Say("id22", "The Say Activity")
-    three = Sing("id33", "The Sing Activity")
+    two = fair_bpm.Say("id22", "The Say Activity")
+    three = fair_bpm.Sing("id33", "The Sing Activity")
     three.add_parent(two.id)
-    four = Say("id44", "The Second Say Activity")
+    four = fair_bpm.Say("id44", "The Second Say Activity")
     four.add_parent(two.id)
-    five = Sing("id55", "The Second Sing Activity")
+    five = fair_bpm.Sing("id55", "The Second Sing Activity")
     five.add_parent(two.id)
-    ps = Process("Process_Two")
+    ps = fair_bpm.Process("Process_Two")
     ps.activities.append(two)
     ps.activities.append(three)
     ps.activities.append(four)
@@ -29,8 +29,8 @@ def process():
     return ps
 
 def test_dot_tools(process):
-    runner = FlexibleJobRunner()
-    job = process.createJob(111, "SecondJob")
+    runner = fair_bpm.FlexibleJobRunner()
+    job = process.createJob(111)
     runner.execute_job(job)
     tree = parse(job.to_dot())
     assert len(str(tree)) > 10
@@ -43,17 +43,17 @@ def test_dot_tools(process):
 def test_run_job(process):
     ps = process
 
-    runner = FlexibleJobRunner()
+    runner = fair_bpm.FlexibleJobRunner()
 
     print("ps=" + str(ps))
 
-    job = ps.createJob(111, "SecondJob")
+    job = ps.createJob(111)
     runner.execute_job(job)
     tree = parse(job.to_dot())
     g = SimpleGraph.build(tree.kid('Graph'))
     for node in g.nodes:
         print("Node -> "+str(node))
-        assert node['state'] == 'COMPLETE'
+        assert g.nodes[node]['state'] == 'COMPLETE'
 
 def test_to_dot(say):
     output = say.to_dot()

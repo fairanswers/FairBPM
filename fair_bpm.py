@@ -5,6 +5,7 @@ from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
 import time
 from flask import Flask, jsonify, request
+import fair_bpm_test
 
 app = Flask(__name__)
 
@@ -54,7 +55,8 @@ class Activity(Pretty):
 
     def to_dot(self):
         c= self.__class__
-        dot = '  {} [ class = {} name = "{}" state = "{}" returned = "{}" color={} style=filled] \n'.format( self.id, self.__class__.__name__, self.name, self.state, self.returned, self.color)
+        dot = '  {} [ name = "{}" state = "{}" returned = "{}" color={} style=filled] \n'\
+            .format( self.id, self.name, self.state, self.returned, self.color)
         for p in self.parents:
             dot = dot + '{} -> {} \n'.format(p[0], self.id)
         return dot
@@ -247,6 +249,24 @@ class file_dot_data_store(dot_data_store):
         cont=os.listdir(self.store_dir)
         return cont
 
+class generate_dot_runner(Pretty):
+    def __init__(self):
+        self.runner=FlexibleJobRunner()
+
+    def run(self, ps):
+        result = self.runner.execute_job(ps)
+        return ps
+
+@app.route("/run/", methods = ['POST'])
+def dot_run():
+    file = request.data
+    ps = Process.parse(file)
+    runner = FlexibleJobRunner()
+    filename="JOB-"+time.strftime("%Y-%m-%d_%H_%M_%S")
+    job = ps.createJob(111, filename)
+    runner.execute_job(job)
+    return job.to_dot()
+
 
 @app.route("/dot/<string:id>/", methods = ['GET', 'POST', 'DELETE'])
 @app.route("/dot/", defaults={'id': None} , methods = ['GET'])
@@ -273,7 +293,9 @@ store=file_dot_data_store()
 
 if __name__ == '__main__':
     print("Starting")
-    app.run(debug=True)
+    ps = fair_bpm_test.process()
+    fair_bpm_test.test_run_job(ps)
+    #app.run(debug=True)
     # import fair_bpm_test
     # say=fair_bpm_test.say()
     # sing=fair_bpm_test.sing()

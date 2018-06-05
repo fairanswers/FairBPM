@@ -12,7 +12,36 @@
 <button type="button" onclick="save()">Save</button>
 <button type="button" onclick="list()">List</button>
 <button type="button" onclick="dot_delete()">Delete</button>
+<button type="button" onclick="dot_run()">Run</button>
 <script>
+function dot_run() {
+
+  var dot_src = document.getElementById("src").value
+  //Run the process
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", '/run/', true);
+  xhr.onreadystatechange = function() {//Call a function when the state changes.
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        alert("Ran.")
+        //window.location.href = '/show/{{id}}/'
+    }
+  }
+  xhr.send(dot_src);
+
+
+  viz.renderSVGElement(dot_src)
+  .then(function(element) {
+    document.body.appendChild(element);
+  })
+  .catch(error => {
+    // Create a new Viz instance (@see Caveats page for more info)
+    viz = new Viz();
+
+    // Possibly display the error
+    console.error(error);
+  });
+}
+
 function dot_delete() {
   var xhr = new XMLHttpRequest();
   xhr.open("DELETE", '/delete/{{id}}/', true);
