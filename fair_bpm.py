@@ -109,7 +109,6 @@ class Sing(Activity):
     def execute(self):
         print("In Sing "+ self.name)
 
-
 class Process(Pretty):
     def __init__(self, id):
         def __init__(self, id=-1 ):
