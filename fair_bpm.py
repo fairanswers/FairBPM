@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, os, copy, time
+import sys, os, copy, time, codecs
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
 from flask import Flask, jsonify, request
@@ -36,7 +36,7 @@ class Activity(Pretty):
 
     #Pretty sure this will need some work.  Skipping for now
     class StateColor(Pretty):
-        WAITING='WHITE'
+        WAITING='GREY'
         READY='YELLOW'
         COMPLETE='GREEN'
         ERROR='RED'
@@ -50,10 +50,13 @@ class Activity(Pretty):
         self.state=Activity.State.WAITING
         self.returned=self.Returned.ANY
         self.color=self.StateColor.WAITING
+        # Optional command to eval on the jobs "context"
+        self.command=""
 
     def to_dot(self):
+        # http://www.graphviz.org/doc/info/index.html
         c= self.__class__
-        dot = '  {} [ name = "{}" state = "{}" returned = "{}" color={} style=filled] \n'\
+        dot = '  {} [ name = "{}" state = "{}" returned = "{}" fillcolor={} style=filled shape=ellipse] \n'\
             .format( self.id, self.name, self.state, self.returned, self.color)
         for p in self.parents:
             dot = dot + '{} -> {} \n'.format(p[0], self.id)
@@ -87,7 +90,11 @@ class Activity(Pretty):
             # Need to raise error if we ever load here, or inthe outer 'else' from here
         raise TypeError("Parent in add_parent must be string, Activity, or list of activit and condition")
 
-    def execute(self):
+    def execute_command(self, context):
+        if self.command and self.command != "":
+            exec(self.command, context)
+
+    def execute(self, context):
         raise TypeError("Activity.execute should always be overridden, but is being invoked directly. id="+self.id+" name="+self.name)
 
     @classmethod
@@ -101,13 +108,19 @@ class Activity(Pretty):
 
 
 class Say(Activity):
-    def execute(self):
+    def execute(self, context=None):
         print("In Say " +self.name)
 
 
 class Sing(Activity):
-    def execute(self):
+    def execute(self, context=None):
         print("In Sing "+ self.name)
+
+class Command(Activity):
+    def execute(self, context=None):
+        print("In command for name "+ self.name)
+        print("Command for eval "+ self.command)
+        exec(self.command, context)
 
 class Process(Pretty):
     def __init__(self, id):
@@ -115,6 +128,7 @@ class Process(Pretty):
             O.__init__(self, id=-1)
         self.id = id
         self.activities=[]
+        self.context=[]
 
     def to_dot(self):
         dot= 'digraph {} '.format(self.id) + "{"
@@ -151,9 +165,6 @@ class Process(Pretty):
             parent=ps.find_activity_by_id(edge[0])
             child=next((x for x in ps.activities if x.id == edge[1]), None)
             child.add_parent(parent.id)
-
-
-
         return ps
 
 
@@ -162,6 +173,7 @@ class Job(Process):
         self.id=time.time()
         self.process=process
         self.activities=[]
+        self.context = copy.deepcopy(process.context)
         for act in process.activities:
             tmp=copy.deepcopy(act)
             self.activities.append(tmp)
@@ -185,7 +197,8 @@ class FlexibleJobRunner(Pretty):
         self.set_all_parentless_activity_to_ready(job)
         while self.has_ready_activities(job):
             act = self.find_ready_activity(job)
-            act.execute()
+            act.execute_command(job.context)
+            act.execute(job.context)
             act.state=Activity.State.COMPLETE
             nextReady = job.find_children(act)
             for nr in nextReady:
@@ -303,7 +316,7 @@ store=file_dot_data_store()
 if __name__ == '__main__':
     print("Starting")
     ps = fair_bpm_test.process()
-    fair_bpm_test.test_run_job(ps)
+    fair_bpm_test.test_execute_with_context(ps)
     #app.run(debug=True)
     # import fair_bpm_test
     # say=fair_bpm_test.say()

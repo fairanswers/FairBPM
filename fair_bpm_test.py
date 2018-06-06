@@ -52,7 +52,7 @@ def test_run_job(process):
     tree = parse(job.to_dot())
     g = SimpleGraph.build(tree.kid('Graph'))
     for node in g.nodes:
-        print("Node -> "+str(node))
+        # print("Node -> "+str(node))
         assert g.nodes[node]['state'] == 'COMPLETE'
 
 def test_to_dot(say):
@@ -95,3 +95,12 @@ def test_parse_activity_from_dot():
     d={'asdf':'qwerty'}
     act=fair_bpm.Activity.parse_from_dot('bbb',d)
     assert act.asdf == 'qwerty'
+
+def test_execute_with_context(process):
+    com=fair_bpm.Command()
+    context={}
+    context['first']=1
+    com.command
+    com.command="answer=1"
+    com.execute(context)
+    assert context['answer'] == 1
