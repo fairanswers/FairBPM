@@ -1,9 +1,7 @@
 #!/usr/bin/python
-import copy
-import os
+import sys, os, copy, time
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
-import time
 from flask import Flask, jsonify, request
 import fair_bpm_test
 
@@ -94,7 +92,9 @@ class Activity(Pretty):
 
     @classmethod
     def parse_from_dot(cls, id, fields):
-        act=Activity(id)
+        #act=Activity(id)
+        tmp_cls=getattr(sys.modules[__name__], fields['name'])
+        act=tmp_cls(id)
         for key in fields:
             act.__setattr__(str(key),str(fields[key]))
         return act
@@ -128,6 +128,12 @@ class Process(Pretty):
         job = Job(id, self)
         return job
 
+    def find_activity_by_id(self, id):
+        for act in self.activities:
+            if act.id == id:
+                return act
+        return None
+
     @classmethod
     def parse_to_simple_graph(cls, dot):
         tree = parse(dot)
@@ -143,9 +149,10 @@ class Process(Pretty):
         for node in g.nodes:
             ps.activities.append(Activity.parse_from_dot(node, g.nodes[node]))
         for edge in g.edges:
-            act=next((x for x in ps.activities if x.id == edge[1]), None)
-            # if none throw error
-            act.add_parent(edge[0])
+            parent=ps.find_activity_by_id(edge[0])
+            child=next((x for x in ps.activities if x.id == edge[1]), None)
+            child.add_parent(parent.id)
+
 
 
         return ps
@@ -155,7 +162,10 @@ class Job(Process):
     def __init__(self, id, process):
         self.id=time.time()
         self.process=process
-        self.activities=copy.deepcopy(process.activities)
+        self.activities=[]
+        for act in process.activities:
+            tmp=copy.deepcopy(act)
+            self.activities.append(tmp)
 
     def get_first_activity(self):
         for act in self.activities:
@@ -254,7 +264,7 @@ class generate_dot_runner(Pretty):
         self.runner=FlexibleJobRunner()
 
     def run(self, ps):
-        result = self.runner.execute_job(ps)
+        result = self.runner.execute_job(ps.createJob("333"))
         return ps
 
 @app.route("/run/", methods = ['POST'])
