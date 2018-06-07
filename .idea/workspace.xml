@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/fair_bpm.py" line="307" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/fair_bpm.py" line="339" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="Fixed inherritance (probably) for activities.&#10;Need to add&#10;* Context&#10;* Conditional Parents">
+    <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fair_bpm.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fair_bpm_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm_test.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="fair_bpm_test.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="fair_bpm_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+            <state relative-caret-position="329">
+              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -29,13 +31,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fair_bpm.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="fair_bpm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fair_bpm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+            <state relative-caret-position="329">
+              <caret line="336" column="48" lean-forward="true" selection-start-line="336" selection-start-column="48" selection-end-line="336" selection-end-column="48" />
               <folding>
-                <element signature="e#18#44#0" expanded="true" />
+                <element signature="e#18#52#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,15 +100,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="os.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Python27/Lib/os.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4212">
-              <caret line="156" column="18" selection-start-line="156" selection-start-column="18" selection-end-line="156" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor" />
@@ -124,14 +117,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isParent</find>
-      <find>is_p</find>
-      <find>is_</find>
       <find>print</find>
       <find>name</find>
       <find>id</find>
       <find>nodes</find>
-      <find>parse</find>
       <find>&quot;</find>
       <find>FlexibleJobRunner</find>
       <find>33</find>
@@ -144,6 +133,20 @@
       <find>get_activity_by_id</find>
       <find>get_act</find>
       <find>get_ac</find>
+      <find>execute</find>
+      <find>state</find>
+      <find>ustom</find>
+      <find>class Say</find>
+      <find>command</find>
+      <find>eval</find>
+      <find>to</find>
+      <find>to_dot</find>
+      <find>parse</find>
+      <find>def parse</find>
+      <find>todo</find>
+      <find>class act</find>
+      <find>good_dot_src</find>
+      <find>add_parent</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -160,8 +163,8 @@
         <option value="$PROJECT_DIR$/dot_archive/two.dot" />
         <option value="$PROJECT_DIR$/templates/show.html" />
         <option value="$PROJECT_DIR$/front_end.py" />
-        <option value="$PROJECT_DIR$/fair_bpm_test.py" />
         <option value="$PROJECT_DIR$/fair_bpm.py" />
+        <option value="$PROJECT_DIR$/fair_bpm_test.py" />
       </list>
     </option>
   </component>
@@ -230,7 +233,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.front_end">
+  <component name="RunManager" selected="Python.fair_bpm">
     <configuration name="fair_bpm" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="fair_bpm" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -322,8 +325,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.front_end" />
         <item itemvalue="Python.fair_bpm" />
+        <item itemvalue="Python.front_end" />
         <item itemvalue="Python.fair_bpm" />
       </list>
     </recent_temporary>
@@ -416,7 +419,21 @@
       <option name="project" value="LOCAL" />
       <updated>1528287133020</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Fixed inherritance (probably) for activities.&#10;Need to add&#10;* Context&#10;* Conditional Parents">
+      <created>1528287206600</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1528287206600</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added simple context">
+      <created>1528292824713</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1528292824713</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -442,6 +459,12 @@
       <configuration name="py.test in FairBPM" configurationId="tests" />
     </history-entry>
     <history-entry file="py_test_in_FairBPM - 2018.06.05 at 06h 26m 25s.xml">
+      <configuration name="py.test in FairBPM" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_FairBPM - 2018.06.06 at 09h 20m 28s.xml">
+      <configuration name="py.test in FairBPM" configurationId="tests" />
+    </history-entry>
+    <history-entry file="py_test_in_FairBPM - 2018.06.06 at 09h 21m 14s.xml">
       <configuration name="py.test in FairBPM" configurationId="tests" />
     </history-entry>
   </component>
@@ -501,50 +524,47 @@
     <MESSAGE value="Got initial front end rendering." />
     <MESSAGE value="Got delete working.  Need 'run'" />
     <MESSAGE value="Fixed all the tests and got Run started." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed all the tests and got Run started." />
+    <MESSAGE value="Fixed inherritance (probably) for activities.&#10;Need to add&#10;* Context&#10;* Conditional Parents" />
+    <MESSAGE value="Added simple context" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added simple context" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm_test.py</url>
-          <line>89</line>
+          <line>111</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>295</line>
+          <line>319</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>239</line>
+          <line>263</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm_test.py</url>
-          <line>55</line>
-          <option name="timeStamp" value="49" />
+          <line>121</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fair_bpm.py</url>
+          <line>112</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm_test.py</url>
-          <line>49</line>
-          <option name="timeStamp" value="50" />
+          <line>99</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>185</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>175</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>149</line>
-          <option name="timeStamp" value="57" />
+          <url>file://$PROJECT_DIR$/fair_bpm_test.py</url>
+          <line>130</line>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -557,7 +577,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="58" />
+      <option name="time" value="67" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -579,7 +599,7 @@
         <state relative-caret-position="3451">
           <caret line="203" lean-forward="true" selection-start-line="203" selection-end-line="203" />
           <folding>
-            <element signature="e#18#44#0" expanded="true" />
+            <element signature="e#18#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -589,7 +609,7 @@
         <state relative-caret-position="225">
           <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
           <folding>
-            <element signature="e#18#44#0" expanded="true" />
+            <element signature="e#18#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -612,7 +632,7 @@
         <state relative-caret-position="1755">
           <caret line="117" column="8" selection-start-line="117" selection-start-column="8" selection-end-line="117" selection-end-column="8" />
           <folding>
-            <element signature="e#18#44#0" expanded="true" />
+            <element signature="e#18#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -622,7 +642,7 @@
         <state relative-caret-position="1755">
           <caret line="117" column="8" selection-start-line="117" selection-start-column="8" selection-end-line="117" selection-end-column="8" />
           <folding>
-            <element signature="e#18#44#0" expanded="true" />
+            <element signature="e#18#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -632,7 +652,7 @@
         <state relative-caret-position="3000">
           <caret line="200" column="6" lean-forward="true" selection-start-line="200" selection-start-column="6" selection-end-line="200" selection-end-column="6" />
           <folding>
-            <element signature="e#18#44#0" expanded="true" />
+            <element signature="e#18#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -703,16 +723,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/flask/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
@@ -730,12 +740,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/dot_tools-0.1-py2.7.egg/dot_tools/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fair_bpm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+        <state relative-caret-position="329">
+          <caret line="336" column="48" lean-forward="true" selection-start-line="336" selection-start-column="48" selection-end-line="336" selection-end-column="48" />
           <folding>
-            <element signature="e#18#44#0" expanded="true" />
+            <element signature="e#18#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

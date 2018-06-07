@@ -14,12 +14,12 @@ def sing():
 
 @pytest.fixture()
 def process():
-    two = fair_bpm.Say("id22", "The Say Activity")
-    three = fair_bpm.Sing("id33", "The Sing Activity")
+    two = fair_bpm.Say("id22", "Say")
+    three = fair_bpm.Sing("id33", "Sing")
     three.add_parent(two.id)
-    four = fair_bpm.Say("id44", "The Second Say Activity")
+    four = fair_bpm.Say("id44", "Say")
     four.add_parent(two.id)
-    five = fair_bpm.Sing("id55", "The Second Sing Activity")
+    five = fair_bpm.Sing("id55", "Sing")
     five.add_parent(two.id)
     ps = fair_bpm.Process("Process_Two")
     ps.activities.append(two)
@@ -27,6 +27,28 @@ def process():
     ps.activities.append(four)
     ps.activities.append(five)
     return ps
+
+@pytest.fixture()
+def good_dot_src():
+    str='''
+    digraph one {
+  urgent [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
+  send_text [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
+  send_email [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
+  end [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled   
+shape=ellipse]
+  error [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled   
+shape=ellipse]
+  urgent -> send_email [label="False"]
+  urgent -> send_text [label="True"]
+  send_text -> end [label="True"]
+  send_email -> end [label="True"]
+  send_text -> error [label="False"]
+  send_email -> error [label="False"]
+}
+
+    '''
+    return str
 
 def test_dot_tools(process):
     runner = fair_bpm.FlexibleJobRunner()
@@ -91,16 +113,23 @@ def test_file_store(process):
     assert len(store.list())>0
  #   assert store.delete(loaded.id)
 
-def test_parse_activity_from_dot():
-    d={'asdf':'qwerty'}
-    act=fair_bpm.Activity.parse_from_dot('bbb',d)
-    assert act.asdf == 'qwerty'
-
 def test_execute_with_context(process):
     com=fair_bpm.Command()
     context={}
     context['first']=1
-    com.command
     com.command="answer=1"
     com.execute(context)
     assert context['answer'] == 1
+    com.command = "answer=answer+answer"
+    com.execute(context)
+    assert context['answer'] == 2
+
+def test_parse_conditional_parents_from_dot(good_dot_src):
+    ps=fair_bpm.Process.parse(good_dot_src)
+    act=ps.find_activity_by_id('urgent')
+    assert len(act.parents)==0
+    act=ps.find_activity_by_id('send_text')
+    assert len(act.parents)==1
+    act=ps.find_activity_by_id('error')
+    assert len(act.parents)==2
+

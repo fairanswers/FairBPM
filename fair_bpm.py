@@ -59,7 +59,7 @@ class Activity(Pretty):
         dot = '  {} [ name = "{}" state = "{}" returned = "{}" fillcolor={} style=filled shape=ellipse] \n'\
             .format( self.id, self.name, self.state, self.returned, self.color)
         for p in self.parents:
-            dot = dot + '{} -> {} \n'.format(p[0], self.id)
+            dot = dot + '{} -> {} [label={}]\n'.format(p[0], self.id, p[1])
         return dot
 
     def has_parent(self, aid, ret_val):
@@ -70,13 +70,17 @@ class Activity(Pretty):
                 return True
         return False
 
+    # Add an Activity for ANY condition,
+    # Or add an id of an activity for ANY condition
+    # Or add a [Activity, condition]
+    # Or add a [id, condition]
     def add_parent(self, parent):
         # Check for a list.  if so, add the first and second items as parent.
         if type(parent) is list:
             if type(parent[0]) is Activity:
                 parent[0]=parent[0].id
             # Check for string
-            if parent[0] is str:
+            if type(parent[0]) is str:
                 self.parents.append([parent[0], parent[1] ] )
                 return
         # Check for a string.  If so, assume ANY Returned
@@ -103,7 +107,10 @@ class Activity(Pretty):
         tmp_cls=getattr(sys.modules[__name__], fields['name'])
         act=tmp_cls(id)
         for key in fields:
-            act.__setattr__(str(key),str(fields[key]))
+            if key != 'parents':
+                act.__setattr__(str(key),str(fields[key]))
+            else:
+                act.parents=eval(str(fields[key]))
         return act
 
 
@@ -163,8 +170,12 @@ class Process(Pretty):
             ps.activities.append(Activity.parse_from_dot(node, g.nodes[node]))
         for edge in g.edges:
             parent=ps.find_activity_by_id(edge[0])
-            child=next((x for x in ps.activities if x.id == edge[1]), None)
-            child.add_parent(parent.id)
+            child=ps.find_activity_by_id(edge[1])
+            if edge[2]:
+                child.add_parent([parent.id, edge[2]])
+            else:
+                child.add_parent(parent.id)
+
         return ps
 
 
@@ -316,11 +327,17 @@ store=file_dot_data_store()
 if __name__ == '__main__':
     print("Starting")
     ps = fair_bpm_test.process()
-    fair_bpm_test.test_execute_with_context(ps)
-    #app.run(debug=True)
-    # import fair_bpm_test
+    src=fair_bpm_test.good_dot_src()
+    fair_bpm_test.test_parse_conditional_parents_from_dot(src)
+
     # say=fair_bpm_test.say()
     # sing=fair_bpm_test.sing()
+    # fair_bpm_test.test_is_parent_conditional(say, sing)
+
+    #fair_bpm_test.test_execute_with_context(ps)
+    #fair_bpm_test.test_parse_activity_from_dot()
+    #app.run(debug=True)
+    # import fair_bpm_test
     # ps = fair_bpm_test.process()
     # fair_bpm_test.test_parse_activity_from_dot()
     # fair_bpm_test.test_file_store(ps)
