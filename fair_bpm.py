@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, os, copy, time, codecs
+import sys, os, copy, time, random
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
 from flask import Flask, jsonify, request
@@ -34,7 +34,7 @@ class Activity(Pretty):
         ANY='ANY'
         ERROR='ERROR' # Do we need this?
 
-    #Pretty sure this will need some work.  Skipping for now
+    #Pretty sure this will need some work.
     class StateColor(Pretty):
         WAITING='GREY'
         READY='YELLOW'
@@ -66,7 +66,8 @@ class Activity(Pretty):
         if isinstance(aid, Activity):
             aid=aid.id
         for p in self.parents:
-            if p[0] is aid and (p[1] is ret_val or p[1] == Activity.Returned.ANY):
+            if p[0] is aid \
+                    and (str(p[1]) == str(ret_val) or str(p[1]) == str(Activity.Returned.ANY)):
                 return True
         return False
 
@@ -106,11 +107,13 @@ class Activity(Pretty):
         #act=Activity(id)
         tmp_cls=getattr(sys.modules[__name__], fields['name'])
         act=tmp_cls(id)
+        # If this gets complicated, use this solution https://stackoverflow.com/questions/60208/replacements-for-switch-statement-in-python
         for key in fields:
-            if key != 'parents':
-                act.__setattr__(str(key),str(fields[key]))
-            else:
+            # Parents are a list.  Returned is a bool
+            if key == 'parents':
                 act.parents=eval(str(fields[key]))
+            else:
+                act.__setattr__(str(key), str(fields[key]))
         return act
 
 
@@ -118,6 +121,21 @@ class Say(Activity):
     def execute(self, context=None):
         print("In Say " +self.name)
 
+
+class Always_True(Activity):
+    def execute(self, context=None):
+        print("In always_true " +self.name)
+        self.returned = True
+
+class Always_False(Activity):
+    def execute(self, context=None):
+        print("In always_false " +self.name)
+        self.returned = False
+
+class Random_True_False(Activity):
+    def execute(self, context=None):
+        self.returned=[True, False][random.randint(0, 1)]
+        print("In Random_True_False " +self.name +" value = "+str(self.returned) )
 
 class Sing(Activity):
     def execute(self, context=None):
@@ -282,13 +300,13 @@ class file_dot_data_store(dot_data_store):
         cont=os.listdir(self.store_dir)
         return cont
 
-class generate_dot_runner(Pretty):
+class create_runner(Pretty):
     def __init__(self):
         self.runner=FlexibleJobRunner()
 
-    def run(self, ps):
-        result = self.runner.execute_job(ps.createJob("333"))
-        return ps
+    def run(self, job):
+        result = self.runner.execute_job(job)
+        return result
 
 @app.route("/run/", methods = ['POST'])
 def dot_run():
@@ -328,7 +346,7 @@ if __name__ == '__main__':
     print("Starting")
     ps = fair_bpm_test.process()
     src=fair_bpm_test.good_dot_src()
-    fair_bpm_test.test_parse_conditional_parents_from_dot(src)
+    fair_bpm_test.test_random_activities(src)
 
     # say=fair_bpm_test.say()
     # sing=fair_bpm_test.sing()

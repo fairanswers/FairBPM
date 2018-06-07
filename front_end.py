@@ -1,9 +1,9 @@
 #!/usr/bin/python
 from flask import Flask, render_template, request
-from fair_bpm import file_dot_data_store, Process, generate_dot_runner
+from fair_bpm import file_dot_data_store, Process, create_runner
 app = Flask(__name__)
 store = file_dot_data_store()
-runner = generate_dot_runner()
+runner = create_runner()
 
 @app.route('/')
 def index():

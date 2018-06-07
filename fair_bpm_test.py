@@ -32,13 +32,11 @@ def process():
 def good_dot_src():
     str='''
     digraph one {
-  urgent [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
-  send_text [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
-  send_email [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
-  end [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled   
-shape=ellipse]
-  error [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled   
-shape=ellipse]
+  urgent [ name = "Always_True" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
+  send_text [ name = "Random_True_False" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
+  send_email [ name = "Always_False" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
+  end [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
+  error [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
   urgent -> send_email [label="False"]
   urgent -> send_text [label="True"]
   send_text -> end [label="True"]
@@ -46,7 +44,6 @@ shape=ellipse]
   send_text -> error [label="False"]
   send_email -> error [label="False"]
 }
-
     '''
     return str
 
@@ -133,3 +130,16 @@ def test_parse_conditional_parents_from_dot(good_dot_src):
     act=ps.find_activity_by_id('error')
     assert len(act.parents)==2
 
+def test_random_activities(good_dot_src):
+    ps=fair_bpm.Process.parse(good_dot_src)
+    runner=fair_bpm.create_runner()
+    for x in range(1, 100):
+        job=ps.createJob("888")
+        runner.run(job)
+        assert job.find_activity_by_id('urgent').returned == True
+        assert job.find_activity_by_id('send_email').state == 'WAITING'
+        assert job.find_activity_by_id('send_text').state == 'COMPLETE'
+        assert (job.find_activity_by_id('send_text').returned == True
+            or job.find_activity_by_id('error').state == 'COMPLETE')
+        assert (job.find_activity_by_id('send_text').returned == False
+            or job.find_activity_by_id('end').state == 'COMPLETE')
