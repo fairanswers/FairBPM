@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/fair_bpm.py" line="357" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/fair_bpm.py" line="359" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/forever_runs_pytst.py" afterDir="false" />
+    <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="Better testing around conditional parents.  Moved returned back to booleans.  Thinking about putting state ANY is None.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fair_bpm.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fair_bpm_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front_end.py" beforeDir="false" afterPath="$PROJECT_DIR$/front_end.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +21,8 @@
       <file leaf-file-name="fair_bpm_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1853">
-              <caret line="143" selection-start-line="143" selection-end-line="143" />
+            <state relative-caret-position="449">
+              <caret line="145" selection-start-line="145" selection-end-line="145" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -36,8 +33,8 @@
       <file leaf-file-name="fair_bpm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fair_bpm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="112" column="31" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
+            <state relative-caret-position="324">
+              <caret line="55" column="18" lean-forward="true" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
               <folding>
                 <element signature="e#18#52#0" expanded="true" />
               </folding>
@@ -119,8 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>33</find>
-      <find>say</find>
       <find>runner</find>
       <find>class</find>
       <find>deep</find>
@@ -146,9 +141,11 @@
       <find>Activit</find>
       <find>class act</find>
       <find>always_</find>
-      <find>state</find>
       <find>returned</find>
       <find>to_dot</find>
+      <find>StateColor</find>
+      <find>state</find>
+      <find>calculat</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -443,7 +440,14 @@
       <option name="project" value="LOCAL" />
       <updated>1528361877399</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Better testing around conditional parents.  Moved returned back to booleans.  Thinking about putting state ANY is None.">
+      <created>1528365522887</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1528365522887</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -537,7 +541,8 @@
     <MESSAGE value="Fixed inherritance (probably) for activities.&#10;Need to add&#10;* Context&#10;* Conditional Parents" />
     <MESSAGE value="Added simple context" />
     <MESSAGE value="Better testing around conditional parents.  &#10;&#10;??? Need to implement diff between id and name???" />
-    <option name="LAST_COMMIT_MESSAGE" value="Better testing around conditional parents.  &#10;&#10;??? Need to implement diff between id and name???" />
+    <MESSAGE value="Better testing around conditional parents.  Moved returned back to booleans.  Thinking about putting state ANY is None." />
+    <option name="LAST_COMMIT_MESSAGE" value="Better testing around conditional parents.  Moved returned back to booleans.  Thinking about putting state ANY is None." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -549,12 +554,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>337</line>
+          <line>339</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/fair_bpm.py</url>
-          <line>281</line>
+          <line>283</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -577,6 +582,11 @@
           <line>143</line>
           <option name="timeStamp" value="72" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fair_bpm.py</url>
+          <line>63</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -588,7 +598,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="73" />
+      <option name="time" value="74" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -770,8 +780,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1853">
-          <caret line="143" selection-start-line="143" selection-end-line="143" />
+        <state relative-caret-position="449">
+          <caret line="145" selection-start-line="145" selection-end-line="145" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -780,8 +790,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fair_bpm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="112" column="31" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
+        <state relative-caret-position="324">
+          <caret line="55" column="18" lean-forward="true" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
           <folding>
             <element signature="e#18#52#0" expanded="true" />
           </folding>

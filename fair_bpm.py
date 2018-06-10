@@ -22,6 +22,7 @@ def kv(d):
 
 
 class Activity(Pretty):
+    # Not convinced this is a good way to do it.
     class State(Pretty):
         WAITING='WAITING'
         READY='READY'
@@ -34,13 +35,6 @@ class Activity(Pretty):
         ANY='ANY'
         ERROR='ERROR' # Do we need this?
 
-    #Pretty sure this will need some work.
-    class StateColor(Pretty):
-        WAITING='GREY'
-        READY='YELLOW'
-        COMPLETE='GREEN'
-        ERROR='RED'
-
     def __init__(self, id=-1, name='unknown'):
         def __init__(self, id=-1, name='unknown'):
             O.__init__(self, id=-1, name=name)
@@ -49,7 +43,6 @@ class Activity(Pretty):
         self.parents=[]
         self.state=Activity.State.WAITING
         self.returned=self.Returned.ANY
-        self.color=self.StateColor.WAITING
         # Optional command to eval on the jobs "context"
         self.command=""
 
@@ -57,10 +50,19 @@ class Activity(Pretty):
         # http://www.graphviz.org/doc/info/index.html
         c= self.__class__
         dot = '  {} [ name = "{}" state = "{}" returned = "{}" fillcolor={} style=filled shape=ellipse] \n'\
-            .format( self.id, self.name, self.state, self.returned, self.color)
+            .format( self.id, self.name, self.state, self.returned, self.calculate_color())
         for p in self.parents:
             dot = dot + '{} -> {} [label={}]\n'.format(p[0], self.id, p[1])
         return dot
+
+    def calculate_color(self):
+        return {
+            Activity.State.WAITING:  'GREY',
+            Activity.State.READY:    'YELLOW',
+            Activity.State.COMPLETE: 'GREEN',
+            Activity.State.ERROR:    'RED'
+        }.get(self.state, 'RED')
+
 
     def has_parent(self, aid, ret_val):
         if isinstance(aid, Activity):
