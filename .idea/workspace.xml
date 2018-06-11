@@ -102,8 +102,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="619">
-              <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+            <state relative-caret-position="643">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
             </state>
           </provider>
         </entry>
@@ -466,7 +466,21 @@
       <option name="project" value="LOCAL" />
       <updated>1528698481772</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Got colors to work">
+      <created>1528699318043</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1528699318043</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Updating docs.">
+      <created>1528699441059</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1528699441059</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -562,7 +576,8 @@
     <MESSAGE value="Better testing around conditional parents.  &#10;&#10;??? Need to implement diff between id and name???" />
     <MESSAGE value="Better testing around conditional parents.  Moved returned back to booleans.  Thinking about putting state ANY is None." />
     <MESSAGE value="Got colors to work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Got colors to work" />
+    <MESSAGE value="Updating docs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating docs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -886,8 +901,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+        <state relative-caret-position="643">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
         </state>
       </provider>
     </entry>

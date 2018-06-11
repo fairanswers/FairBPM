@@ -28,10 +28,12 @@ For an example, lets say you wanted a process that would automate your morning c
 #    If it's the first of the month, give it a pill.  If its the last pill, order more.
 
 If you break this into individual activites, it might look like this:
-#   Feed the dog.
-#   Does it need water?
-#      Yes: give it water.
-#      No: do nothing.
+#    Feed the dog.
+#    Does it need water?
+     #    Yes: give it water.
+     #    No: do nothing.
+
+
 #   Is it the first of the month?
 #      No: do nothing.
 #      Yes:  Give it a pill
