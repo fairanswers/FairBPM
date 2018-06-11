@@ -23,19 +23,19 @@ If you're an Object Oriented programmer: The process is like the class, and the 
 
 For an example, lets say you wanted a process that would automate your morning chores.  The steps might be.
 
-#.   Feed the dog.
-#.   Give it water if it needs it.
-#.   If it's the first of the month, give it a pill.  If its the last pill, order more.
+#    Feed the dog.
+#    Give it water if it needs it.
+#    If it's the first of the month, give it a pill.  If its the last pill, order more.
 
 If you break this into individual activites, it might look like this:
-#.  Feed the dog.
-#.  Does it need water?
-#.     Yes: give it water.
-#.     No: do nothing.
-#.  Is it the first of the month?
-#.     No: do nothing.
-#.     Yes:  Give it a pill
-#.        Any pills left?
-#.           Yes: do nothing.
-#.           No:  order pills.
+#   Feed the dog.
+#   Does it need water?
+#      Yes: give it water.
+#      No: do nothing.
+#   Is it the first of the month?
+#      No: do nothing.
+#      Yes:  Give it a pill
+#         Any pills left?
+#            Yes: do nothing.
+#            No:  order pills.
 
