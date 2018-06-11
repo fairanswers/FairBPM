@@ -19,7 +19,23 @@ map out what should happen. In a traditional language, this would be when you ar
 Run time takes the process, creates a Job from that process, and runs the job.  Traditionally, this would be what
 happens when the code is running. It remembers what activites have been run, and what values have been set.
 
-If you're an Object Oriented programmer: The process is
-like the class, and the job is the instance of that class.
+If you're an Object Oriented programmer: The process is like the class, and the job is the instance of that class.
 
+For an example, lets say you wanted a process that would automate your morning chores.  The steps might be.
+
+#.   Feed the dog.
+#.   Give it water if it needs it.
+#.   If it's the first of the month, give it a pill.  If its the last pill, order more.
+
+If you break this into individual activites, it might look like this:
+#.  Feed the dog.
+#.  Does it need water?
+#.     Yes: give it water.
+#.     No: do nothing.
+#.  Is it the first of the month?
+#.     No: do nothing.
+#.     Yes:  Give it a pill
+#.        Any pills left?
+#.           Yes: do nothing.
+#.           No:  order pills.
 
