@@ -31,12 +31,14 @@ For an example, lets say you wanted a process that would automate your morning c
 If you break this into individual activites, it might look like this:
 1.    Feed the dog.
 2.    Does it need water?
-      2.1    Yes: give it water.
-      2.2    No: do nothing.
+
+        2.1    Yes: give it water.
+
+        2.2    No: do nothing.
 3.    Is it the first of the month?
-      3.1      No: do nothing.
-      3.2      Yes:  Give it a pill
-      3.3      Any pills left?
-               3.3.1 . Yes: do nothing.
-               3.3.2 . No:  order pills.
+        3.1      No: do nothing.
+        3.2      Yes:  Give it a pill
+        3.3      Any pills left?
+                3.3.1 . Yes: do nothing.
+                3.3.2 . No:  order pills.
 
