@@ -22,7 +22,7 @@ def kv(d):
 
 
 class Activity(Pretty):
-    # Not convinced this is a good way to do it.
+    # Not convinced inner classes is a good way to do this.
     class State(Pretty):
         WAITING='WAITING'
         READY='READY'
@@ -106,8 +106,11 @@ class Activity(Pretty):
 
     @classmethod
     def parse_from_dot(cls, id, fields):
-        #act=Activity(id)
-        tmp_cls=getattr(sys.modules[__name__], fields['name'])
+        print("About to check for fields. name in "+str(fields))
+        if fields['name'] is None:
+            return "Nope"
+        module_name, class_name = Activity.get_module_class_name_from_dot_name(fields['name'])
+        tmp_cls=getattr(sys.modules[module_name], class_name)
         act=tmp_cls(id)
         # If this gets complicated, use this solution https://stackoverflow.com/questions/60208/replacements-for-switch-statement-in-python
         for key in fields:
@@ -118,6 +121,16 @@ class Activity(Pretty):
                 act.__setattr__(str(key), str(fields[key]))
         return act
 
+    @classmethod
+    def get_module_class_name_from_dot_name(self, name):
+        # TODO Learn more about modules and sub modules.  Handle "module.submodule.Activity, if that's a thing."
+        count=name.split(".")
+        if len(count) > 2:
+            raise AttributeError("Can't parse modules more than one deep.  Module name is "+name)
+        if len(count) == 2:
+            return count
+        else:
+            return __name__ , name
 
 class Say(Activity):
     def execute(self, context=None):
@@ -146,8 +159,8 @@ class Sing(Activity):
 class Command(Activity):
     def execute(self, context=None):
         print("In command for name "+ self.name)
-        print("Command for eval "+ self.command)
-        exec(self.command, context)
+        print("Pre-run for command should have already run.  no-op execute "+ self.command)
+
 
 class Process(Pretty):
     def __init__(self, id):
@@ -187,6 +200,7 @@ class Process(Pretty):
         g = SimpleGraph.build(tree.kid('Graph'))
         ps=Process(id)
         for node in g.nodes:
+            print("About to parse node "+str(node))
             ps.activities.append(Activity.parse_from_dot(node, g.nodes[node]))
         for edge in g.edges:
             parent=ps.find_activity_by_id(edge[0])
@@ -342,13 +356,22 @@ def dot_edit(id=None):
         return "Ok"
 
 
+class FeedDog(Activity):
+    def execute(self):
+        print("Starting feed dog")
+        # Put feed dog code here
+
 store=file_dot_data_store()
 
 if __name__ == '__main__':
     print("Starting")
     ps = fair_bpm_test.process()
-    src=fair_bpm_test.good_dot_src()
-    fair_bpm_test.test_random_activities(src)
+    #fair_bpm_test.get_module_class_name_from_dot_name()
+    src=fair_bpm_test.chore_dot()
+    fair_bpm_test.test_chores(src)
+
+    # src=fair_bpm_test.good_dot_src()
+    # fair_bpm_test.test_random_activities(src)
 
     # say=fair_bpm_test.say()
     # sing=fair_bpm_test.sing()

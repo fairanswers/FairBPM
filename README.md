@@ -63,12 +63,17 @@ class feed_dog(Activity):
         print("Starting feed dog")
         # Put feed dog code here
 
+class needs_water(Activity):
+    def execute(self):
+        print("Checking if dog needs water dog")
+        # Put checking code here
+
 class water_dog(Activity):
     def execute(self):
         print("Starting water dog")
         # Put water dog code here
 
-class medicate_dog(Activity):
+    class medicate_dog(Activity):
     def execute(self):
         print("Starting medicate dog")
         # Put medicate dog code here
