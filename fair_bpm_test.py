@@ -53,10 +53,10 @@ def chore_dot():
     str='''
 digraph chores
 {
-    feed_dog -> needs_water [label="ANY"]
+    feed_dog -> needs_water [label="ANY"]   
     needs_water -> water_dog [label=True]
     needs_water -> is_first_of_month [label=False]
-    water_dog -> is_first_of_month [label=True]
+    water_dog -> is_first_of_month [label=ANY]
     is_first_of_month -> end [label=False]
     is_first_of_month -> medicate_dog [label=True]
     medicate_dog -> pills_left 
@@ -65,9 +65,9 @@ digraph chores
     order_medication -> end [label=True]
     
     feed_dog [name="fair_bpm_example.FeedDog"]
-    needs_water [name="Command"]
+    needs_water [name="Always_True"]
     water_dog [name="fair_bpm_example.WaterDog"]
-    is_first_of_month [name=Command command="return True"]
+    is_first_of_month [name=Command command="self.returned=True"]
     end [name=Say]
     medicate_dog [name="fair_bpm_example.MedicateDog"]
     pills_left [name=Command command="return False"]

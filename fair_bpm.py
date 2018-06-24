@@ -169,7 +169,7 @@ class Process(Pretty):
             O.__init__(self, id=-1)
         self.id = id
         self.activities=[]
-        self.context=[]
+        self.context={}
 
     def to_dot(self):
         dot= 'digraph {} '.format(self.id) + "{"
@@ -220,6 +220,8 @@ class Job(Process):
         self.process=process
         self.activities=[]
         self.context = copy.deepcopy(process.context)
+        # Note:  Job adds self to context because it's the instance of the Process for this particular run.
+        self.context['self']=self
         for act in process.activities:
             tmp=copy.deepcopy(act)
             self.activities.append(tmp)
@@ -367,9 +369,9 @@ store=file_dot_data_store()
 if __name__ == '__main__':
     print("Starting")
     ps = fair_bpm_test.process()
-    fair_bpm_test.test_parse_conditional_parents_from_dot(fair_bpm_test.good_dot_src())
-    # src=fair_bpm_test.chore_dot()
-    # fair_bpm_test.test_chores(src)
+    #fair_bpm_test.test_parse_conditional_parents_from_dot(fair_bpm_test.good_dot_src())
+    src=fair_bpm_test.chore_dot()
+    fair_bpm_test.test_chores(src)
     # fair_bpm_test.test_execute_with_context(ps)
     # fair_bpm_test.get_module_class_name_from_dot_name()
 
