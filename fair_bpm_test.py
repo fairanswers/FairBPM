@@ -152,12 +152,21 @@ def test_execute_with_context(process):
 
 def test_parse_conditional_parents_from_dot(good_dot_src):
     ps=fair_bpm.Process.parse(good_dot_src)
-    act=ps.find_activity_by_id('urgent')
-    assert len(act.parents)==0
-    act=ps.find_activity_by_id('send_text')
-    assert len(act.parents)==1
-    act=ps.find_activity_by_id('error')
-    assert len(act.parents)==2
+    urgent=ps.find_activity_by_id('urgent')
+    assert len(urgent.parents)==0
+    urgent.returned="False"
+    send=ps.find_activity_by_id('send_text')
+    assert len(send.parents) == 1
+    assert not send.has_parent(urgent.id, urgent.returned)
+    urgent.returned="True"
+    assert send.has_parent(urgent.id, urgent.returned)
+
+    error=ps.find_activity_by_id('error')
+    assert len(error.parents)==2
+    send.returned="True"
+    assert not error.has_parent(send.id, send.returned)
+    send.returned="False"
+    assert error.has_parent(send.id, send.returned)
 
 def test_random_activities(good_dot_src):
     ps=fair_bpm.Process.parse(good_dot_src)
