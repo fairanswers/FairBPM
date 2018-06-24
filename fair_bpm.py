@@ -32,7 +32,7 @@ class Activity(Pretty):
     class Returned(Pretty):
         TRUE=True
         FALSE=False
-        ANY='ANY'
+        ANY='Any'
         ERROR='ERROR' # Do we need this?
 
     def __init__(self, id=-1, name='unknown'):

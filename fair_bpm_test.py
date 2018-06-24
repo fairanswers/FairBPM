@@ -33,11 +33,11 @@ def process():
 def good_dot_src():
     str='''
     digraph one {
-  urgent [ name = "Always_True" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
-  send_text [ name = "Random_True_False" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
-  send_email [ name = "Always_False" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
-  end [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
-  error [ name = "Say" state = "WAITING" returned = "ANY" fillcolor=WHITE style=filled shape=ellipse]
+  urgent [ name = "Always_True" state = "WAITING" returned = "Any" fillcolor=WHITE style=filled shape=ellipse]
+  send_text [ name = "Random_True_False" state = "WAITING" returned = "Any" fillcolor=WHITE style=filled shape=ellipse]
+  send_email [ name = "Always_False" state = "WAITING" returned = "Any" fillcolor=WHITE style=filled shape=ellipse]
+  end [ name = "Say" state = "WAITING" returned = "Any" fillcolor=WHITE style=filled shape=ellipse]
+  error [ name = "Say" state = "WAITING" returned = "Any" fillcolor=WHITE style=filled shape=ellipse]
   urgent -> send_email [label="False"]
   urgent -> send_text [label="True"]
   send_text -> end [label="True"]
@@ -53,10 +53,10 @@ def chore_dot():
     str='''
 digraph chores
 {
-    feed_dog -> needs_water [label="ANY"]   
+    feed_dog -> needs_water [label="Any"]   
     needs_water -> water_dog [label=True]
     needs_water -> is_first_of_month [label=False]
-    water_dog -> is_first_of_month [label=ANY]
+    water_dog -> is_first_of_month [label=Any]
     is_first_of_month -> end [label=False]
     is_first_of_month -> medicate_dog [label=True]
     medicate_dog -> pills_left 
