@@ -62,15 +62,15 @@ digraph chores
     medicate_dog -> pills_left 
     pills_left -> end [label=True]
     pills_left -> order_medication [label=False]
-    order_medication -> end [label=True]
+    order_medication -> end [label=Any]
     
     feed_dog [name="fair_bpm_example.FeedDog"]
     needs_water [name="Always_True"]
     water_dog [name="fair_bpm_example.WaterDog"]
-    is_first_of_month [name=Command command="self.returned=True"]
+    is_first_of_month [name=Command command="me.returned=True"]
     end [name=Say]
     medicate_dog [name="fair_bpm_example.MedicateDog"]
-    pills_left [name=Command command="return False"]
+    pills_left [name=Command command="me.returned=False"]
     order_medication [name="fair_bpm_example.OrderMedication"]
 }
 '''

@@ -100,6 +100,7 @@ class Activity(Pretty):
     def execute_command(self, context):
         if self.command and self.command != "":
             exec(self.command, context)
+            print("execute_command context="+str(context))
 
     def execute(self, context):
         raise TypeError("Activity.execute should always be overridden, but is being invoked directly. id="+self.id+" name="+self.name)
@@ -221,7 +222,7 @@ class Job(Process):
         self.activities=[]
         self.context = copy.deepcopy(process.context)
         # Note:  Job adds self to context because it's the instance of the Process for this particular run.
-        self.context['self']=self
+        self.context['job']=self
         for act in process.activities:
             tmp=copy.deepcopy(act)
             self.activities.append(tmp)
@@ -245,6 +246,7 @@ class FlexibleJobRunner(Pretty):
         self.set_all_parentless_activity_to_ready(job)
         while self.has_ready_activities(job):
             act = self.find_ready_activity(job)
+            job.context['me']=act
             act.execute_command(job.context)
             act.execute(job.context)
             act.state=Activity.State.COMPLETE
