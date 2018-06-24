@@ -144,10 +144,10 @@ def test_execute_with_context(process):
     context={}
     context['first']=1
     com.command="answer=1"
-    com.execute(context)
+    com.execute_command(context)
     assert context['answer'] == 1
     com.command = "answer=answer+answer"
-    com.execute(context)
+    com.execute_command(context)
     assert context['answer'] == 2
 
 def test_parse_conditional_parents_from_dot(good_dot_src):
@@ -178,6 +178,7 @@ def test_chores(chore_dot):
     runner = fair_bpm.create_runner()
     job = ps.createJob("999")
     runner.run(job)
+    print(job.to_dot())
 
 
 def get_module_class_name_from_dot_name():

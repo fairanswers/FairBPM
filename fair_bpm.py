@@ -104,6 +104,7 @@ class Activity(Pretty):
     def execute(self, context):
         raise TypeError("Activity.execute should always be overridden, but is being invoked directly. id="+self.id+" name="+self.name)
 
+
     @classmethod
     def parse_from_dot(cls, id, fields):
         print("About to check for fields. name in "+str(fields))
@@ -366,9 +367,10 @@ store=file_dot_data_store()
 if __name__ == '__main__':
     print("Starting")
     ps = fair_bpm_test.process()
-    #fair_bpm_test.get_module_class_name_from_dot_name()
     src=fair_bpm_test.chore_dot()
     fair_bpm_test.test_chores(src)
+    #fair_bpm_test.test_execute_with_context(ps)
+    #fair_bpm_test.get_module_class_name_from_dot_name()
 
     # src=fair_bpm_test.good_dot_src()
     # fair_bpm_test.test_random_activities(src)

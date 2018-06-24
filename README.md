@@ -3,9 +3,9 @@
 ## Overview
 Fair BPM is a workflow library. With it, you can describe a process as a series of steps to get work done.
 
-The basic building block in Fair BPM is the Activity.  An activity usually does one thing.  For instance, and activity might get data from a service, calculate a value, or send a message.
+The basic building block in Fair BPM is the **Activity**.  An activity usually does one thing.  For instance, and activity might get data from a service, calculate a value, or send a message.
 
-A group of activities is called a process.  The process describes what activities will be executed and how they relate.
+A group of activities is called a **Process**.  The process describes what activities will be executed and how they relate.
 
 # Features:
 
@@ -21,7 +21,7 @@ If you're an Object Oriented programmer: The process is like the class, and the 
 
 # Example
 
-For an example, lets say you wanted a process that would automate your morning chores.  The steps might be.
+For an example, lets say we have a (very smart) smart home, and we wanted a process that would automate dog chores.  The steps might be.
 
 1.    Feed the dog.
 2.    Give it water if it needs it.
@@ -51,7 +51,9 @@ If you break this into individual activites, it might look like this:
 
 
 ### Step 1:  Programmatically
-Programmatically, you would create a stand-alone piece of functionality that does each of the *custom* tasks (feed dog, water dog, medicate dog, order medication), then write tests to make sure they worked.
+Programmatically, you would create a stand-alone piece of functionality that does each of the *custom* tasks (feed dog,
+water dog, medicate dog, order medication).  This would interact with your smart home to find information and get things
+done.
 
 This code in in example/fair_bpm_example.py
 
@@ -84,14 +86,15 @@ class order_medication(Activity):
         # Put order_medication dog code here
 </pre>
 
-What about the other tasks, where we make decisions?  Luckily, Fair BPM has some default activities that can handle that.  String manipulation, checking for values, and making simple decisions are all handled by Activiites that are already written, like
+What about the other tasks, where we make decisions?  Luckily, Fair BPM has some default activities that can handle that.
+String manipulation, checking for values, and making simple decisions are all handled by Activiites that are already
+written, like the Command activity.  More on that later.
 <list>
 
 
 ### Graphically.
 This flow would graphically look like this
 
-<example>
 
 ### Conceptually
 And behind the scenes, it would be saved in a file with a string like this.
