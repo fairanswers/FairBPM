@@ -4,10 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/fair_bpm.py" line="389" mnemonic="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="Lots More Docs">
-      <change afterPath="$PROJECT_DIR$/example/ExampleChoresProcess.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ExampleHitEachNode.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/chores.dot" afterDir="false" />
+    <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -24,7 +21,7 @@
       <file leaf-file-name="fair_bpm_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
+            <state relative-caret-position="1593">
               <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -36,7 +33,7 @@
       <file leaf-file-name="fair_bpm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fair_bpm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
+            <state relative-caret-position="10017">
               <caret line="375" selection-start-line="375" selection-end-line="375" />
               <folding>
                 <element signature="e#18#52#0" expanded="true" />
@@ -48,7 +45,7 @@
       <file leaf-file-name="front_end.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front_end.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
+            <state relative-caret-position="837">
               <caret line="32" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="e#18#67#0" expanded="true" />
@@ -66,20 +63,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="122" selection-start-line="122" selection-end-line="122" />
+            <state relative-caret-position="484">
+              <caret line="141" column="17" lean-forward="true" selection-start-line="141" selection-start-column="17" selection-end-line="141" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chores.dot" pinned="false" current-in-tab="true">
+      <file leaf-file-name="chores.dot" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/chores.dot">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="594">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
             </state>
           </provider>
         </entry>
@@ -150,8 +147,8 @@
         <option value="$PROJECT_DIR$/fair_bpm_example.py" />
         <option value="$PROJECT_DIR$/fair_bpm_test.py" />
         <option value="$PROJECT_DIR$/fair_bpm.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/example/chores.dot" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -166,6 +163,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -197,7 +195,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -528,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529877198606</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Lots More Docs">
+      <created>1529916469846</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1529916469846</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -576,14 +580,14 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" visible="true" weight="0.38575983" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49900597" weight="0.38575983" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
+      <window_info anchor="bottom" id="Message" order="0" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -613,7 +617,8 @@
     <MESSAGE value="Added self to context, so command can set self.returned=True or False.  Realized it may be smarter to use a decorator on Activity to get pre- and post- runs instead of relying on the runner.  Needs more thought." />
     <MESSAGE value="Changed ANY to Any" />
     <MESSAGE value="Finally got dynamic code working!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finally got dynamic code working!" />
+    <MESSAGE value="Lots More Docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lots More Docs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -981,20 +986,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/front_end.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
+        <state relative-caret-position="837">
           <caret line="32" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="e#18#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1008,7 +1003,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fair_bpm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
+        <state relative-caret-position="10017">
           <caret line="375" selection-start-line="375" selection-end-line="375" />
           <folding>
             <element signature="e#18#52#0" expanded="true" />
@@ -1016,17 +1011,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/example/chores.dot">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="122" selection-start-line="122" selection-end-line="122" />
+        <state relative-caret-position="594">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/chores.dot">
+    <entry file="file://$PROJECT_DIR$/fair_bpm_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="1593">
+          <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="141" column="17" lean-forward="true" selection-start-line="141" selection-start-column="17" selection-end-line="141" selection-end-column="17" />
         </state>
       </provider>
     </entry>

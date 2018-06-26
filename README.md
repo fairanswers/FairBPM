@@ -1,20 +1,20 @@
 # FairBPM
 
 ## Overview
-Fair BPM is a workflow library. With it, you can describe a job you want to do, then have the computer do it.  It's like
+Fair BPM is a workflow library. With it, you can describe a something you want to do, then have the computer do it.  It's like
 a simple programming language that non-programmers can use. Since it's simple and flexible, our business users can change
 how it works without waiting for the requirements/design/code/test/deploy cycle.
 
-The basic building block in Fair BPM is the **activity**.  An activity usually does one thing.  For instance, an activity
+The basic building block in Fair BPM is the **activity**.  An activity usually completes one step.  For instance, an activity
 might get data from a service, calculate a value, or send an email.  The activity gets written in python where we can
-thoroughly test how it works before it goes into production.  Once it's deployed, the activity can be strung together with other
-activities to describe a process.
+test it before it goes into production.  Once it's deployed, the activity can be strung together with other
+activities to describe a process. Activities can be used more than once in the same process.
 
 A **process** is a group of activities.  The process describes what activities will be executed and how they relate.
 
-To run a process, you first create a **job** A job is a copy of the process that remembers which steps have been done. If you
-think of a process as a recipe, the job is one time when you're using that recipe.  It has a distinct start time and trigger,
-and if you run two jobs, they will remember separate (potentially different) details depending on what's needed.
+To run a process, you first create a **job**. A job is a copy of the process that remembers which steps have been done.
+If a process is a recipe for a meal, a job is what happens when someone orders that meal.
+If you run two jobs they will have different details, even if they use the same process.
 
 # Example
 
@@ -81,7 +81,6 @@ class OrderMedication(fair_bpm.Activity):
 
 What about the other tasks, where we make decisions?  Luckily, Fair BPM has some default activities that can handle that.
 String manipulation, comparing values, and making simple decisions are all handled by the Command activity.  More on that later.
-<list>
 
 
 ### Graphically.
@@ -120,6 +119,7 @@ digraph chores
     pills_left -> order_medication [label=False]
     order_medication -> end [label=Any]
 }
+
 </pre>
 
 
@@ -146,3 +146,9 @@ Luckily, Graphviz has been around for decades, so there are parsers for it in ju
 
 # Installation
 TBD
+
+# What's Missing?
+As you can see, the FairBPM is a back-end library for running workflows.  In order to be a helpful tool for non-programmers,
+we'll need a snazzy front end that makes it easy to
+*  Declare nodes and Edges (and their attributes)
+*  Use the RESTful interface to CRUD processes
