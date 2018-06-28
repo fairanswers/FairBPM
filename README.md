@@ -1,24 +1,22 @@
 # FairBPM
 
 ## Overview
-Fair BPM is a workflow library. With it, you can describe a something you want to do, then have the computer do it.  It's like
-a simple programming language that non-programmers can use. Since it's simple and flexible, our business users can change
-how it works without waiting for the requirements/design/code/test/deploy cycle.
+Fair BPM is a workflow library. With it, you can describe a something you want to do, then have the computer do it.  It's like a simple programming language that non-programmers can use. Since it's simple and flexible, our business users can change how it works without waiting for the requirements/design/code/test/deploy cycle.
 
-The basic building block in Fair BPM is the **activity**.  An activity usually completes one step.  For instance, an activity
-might get data from a service, calculate a value, or send an email.  The activity gets written in python where we can
-test it before it goes into production.  Once it's deployed, the activity can be strung together with other
-activities to describe a process. Activities can be used more than once in the same process.
+The basic building block in Fair BPM is the **activity**.  An activity is a reusable piece of code that completes one step.  For instance, an activity might get data from a service, calculate a value, or send an email.  An activity can be strung together with other activities to describe a process. Activities can be used more than once in the same process.
 
-A **process** is a group of activities.  The process describes what activities will be executed and how they relate.
+A **process** is a group of activities.  The process describes what activities will be executed and how they relate.  Think of a process as a recipe.
 
-To run a process, you first create a **job**. A job is a copy of the process that remembers which steps have been done.
-If a process is a recipe for a meal, a job is what happens when someone orders that meal.
-If you run two jobs they will have different details, even if they use the same process.
+To run a process, you first create a **job**. A job is a copy of the process that _remembers which values have been set and steps have been done_.
+If a process is a recipe for a sandwich, a job is a copy of the recipe PLUS what happened when you ran each activity.  If someone ordered 2 sandwiches at the same time, we'd want to make sure we did all the steps for each sandwich.  Jobs help us do that.
+
+Processes are started by a **trigger**.  A trigger is like when someone orders a sandwich.  Triggers can be if an alarm gets raised, an email comes in, or if a timer expires.  
+
+A trigger matches a process, which creates a job with all the activities.  There's more to it, but let's see how it works together.
 
 # Example
 
-For an example, lets say we have a (very smart) smart home, and we wanted a process that would automate dog chores.  The steps might be.
+For an example, lets say we have a (very smart) smart home, and we wanted a process that would automate the morning dog chores.  The steps might be.
 
 1.    Feed the dog.
 2.    Give it water if it needs it.
@@ -46,11 +44,15 @@ If you break this into individual activities, it might look like this:
 
 4.    Finish
 
+The trigger would be a timer, which would go off every morning.  That trigger could include information we need to complete the job, like what day of the month it is.
 
 ### Step 1:  Programmatically
-Programmatically, you can see there are two types of tasks: custom and standard.  A custom commands interact wit the smart home: feed dog,
-water dog, medicate dog, order medication. Standard commands are
-for making decisions and simple calculations.  Custom command look like this.
+Programmatically, you can see there are two types of tasks: custom and standard.  Our custom commands interact with the smart home: feed dog,
+water dog, medicate dog, order medication.
+
+Custom steps are written in Python, and extend the Activity class.  This gives them a method called 'execute' where the custom code can go.  It's also the key to testing activities with different inputs and outputs before they go into production.
+
+Custom commands look like this:
 
 [This code in in example/fair_bpm_example.py]
 
@@ -79,21 +81,18 @@ class OrderMedication(fair_bpm.Activity):
         # Put order_medication dog code here
 </pre>
 
-What about the other tasks, where we make decisions?  Luckily, Fair BPM has some default activities that can handle that.
-String manipulation, comparing values, and making simple decisions are all handled by the Command activity.  More on that later.
+For the other tasks, we can use some built-in activities. Making simple decisions, comparing strings, and string manipulation can be handled by the Command activity.  This activity runs a snippet of custom python code that you describe in your process.  Running custom code that your users type in is a bigger topic that we won't get into here.
 
-
-### Graphically.
+### Graphically
 This flow would graphically look like this
 
-![Example Chores Process][example/ExampleChoresProcess.PNG]
+![Example Chores Process](example/ExampleChoresProcess.PNG)
 
 ### Conceptually
-We start at the top and see the first activity is to water the dog.  Then the arrow goes to "need_water", and there are two
-arrows that come from that, labeled True and False.  If the dog does need water, it follows the True path and add some water
-to her bowl.  If not, it skips that step and goes on.
+We start at the top and see the first activity is to feed the dog.  Then the arrow goes to "need_water", and there are two
+arrows that come from that, labeled True and False.  If the activity decides that dog does need water, it follows the True path and add some water to her bowl.  If not, it skips that step and goes on.
 
-Each activity can have a "returned" vale that can be either True, False, or Any. If your link to the next step is Any, the job doesn't care if you returned a True or False, or if you just left it as Any. Otherwise it only follow the step with its label.
+Each activity can have a "returned" vale that can be either True, False, or Any. For an activity, if a link to the next step is Any, the job ignores the returned value. Otherwise the job only follows the step with the correct label.
 
 Behind the scenes, chores are saved in a file with a string like this.
 <pre>
@@ -108,7 +107,7 @@ digraph chores
     pills_left [name=Command command="me.returned=False"]
     order_medication [name="fair_bpm_example.OrderMedication"]
 
-    feed_dog -> needs_water [label="Any"]
+    feed_dog -> needs_water [label=Any]
     needs_water -> water_dog [label=True]
     needs_water -> is_first_of_month [label=False]
     water_dog -> is_first_of_month [label=Any]
@@ -122,6 +121,23 @@ digraph chores
 
 </pre>
 
+You can see we start with a
+<pre>
+  digraph chores
+</pre>
+, which in DOT language means "directed graph", or nodes that are connected by arrows.  Then in {} we have two types of objects: a set of nodes and a set of edges.  The nodes look like
+<pre>
+  node_name [ key=value ]
+</pre>
+
+The keys and values depend on the class for that activity, but each node gets a class name at a minimum.  The first two nodes are feed_dog and need_water.
+
+The next session is a list of edges between the nodes like this:
+<pre>
+  feed_dog -> needs_water [label=Any]
+</pre>
+
+Here the idea is the same, but the label is the condition that we put on the activity's returned value.
 
 # Features:
 
@@ -140,15 +156,13 @@ For each activity there are a list of key/value pairs [inside brackets] that giv
 If you'll look at the is_first_of_month node, the name is Command, and it has a "command" pair.  This value is actually __python__ code that gets run for this activity.  This is dangerous in the hands of hackers so you'll need to be careful.
 
 # What's Missing?
-The big thing that users need (but the library doesn't) is a Graphcial User Interface.  This is a graphical language, and it needs a reliable interface for the users to use.  Otherwise, they'll be POSTing strings to services to design processes.
+The big thing that users need (but the library doesn't) is a Graphical User Interface.  This is a graphical language, and it needs a reliable interface for the users to use.  Otherwise, they'll be POSTing strings to services, and we can do better than that.
 
 Luckily, Graphviz has been around for decades, so there are parsers for it in just about any language you'd want to use.
 
-# Installation
-TBD
-
-# What's Missing?
-As you can see, the FairBPM is a back-end library for running workflows.  In order to be a helpful tool for non-programmers,
-we'll need a snazzy front end that makes it easy to
+In order to be a helpful tool for non-programmers, we'll need a snazzy front end that makes it easy to:
 *  Declare nodes and Edges (and their attributes)
 *  Use the RESTful interface to CRUD processes
+
+# Installation
+pip install git+https://github.com/fairanswers/FairBPM.git
