@@ -1,0 +1,15 @@
+digraph demo {
+	random_tf1 [ name = "Random_True_False" ]
+	random_tf2 [ name = "Random_True_False" ]
+	random_tf3 [ name = "Random_True_False" ]
+	random_tf4 [ name = "Random_True_False" ]
+	random_tf5 [ name = "Random_True_False" ]
+	random_tf6 [ name = "Random_True_False" ]
+	random_tf7 [ name = "Random_True_False" ]
+	random_tf1->random_tf2[label=True]
+	random_tf1->random_tf3[label=False]
+	random_tf2->random_tf4[label=False]
+	random_tf2->random_tf5[label=True]
+	random_tf3->random_tf6[label=False]
+	random_tf3->random_tf7[label=True]
+}

@@ -3,7 +3,7 @@ import sys, os, copy, time, random
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
 from flask import Flask, jsonify, request
-import fair_bpm_test
+#import fair_bpm_test
 
 app = Flask(__name__)
 
@@ -108,7 +108,7 @@ class Activity(Pretty):
 
     @classmethod
     def parse_from_dot(cls, id, fields):
-        print("About to check for fields. name in "+str(fields))
+        #print("About to check for fields. name in "+str(fields))
         if fields['name'] is None:
             return "Nope"
         module_name, class_name = Activity.get_module_class_name_from_dot_name(fields['name'])
@@ -202,7 +202,7 @@ class Process(Pretty):
         g = SimpleGraph.build(tree.kid('Graph'))
         ps=Process(id)
         for node in g.nodes:
-            print("About to parse node "+str(node))
+            #print("About to parse node "+str(node))
             ps.activities.append(Activity.parse_from_dot(node, g.nodes[node]))
         for edge in g.edges:
             parent=ps.find_activity_by_id(edge[0])
