@@ -2,10 +2,10 @@
 import sys, os, copy, time, random
 from dot_tools import parse
 from dot_tools.dot_graph import SimpleGraph
-from flask import Flask, jsonify, request
+#from flask import Flask, jsonify, request
 #import fair_bpm_test
 
-app = Flask(__name__)
+#app = Flask(__name__)
 
 class O(object):
   def __init__(i, **adds): i.__dict__.update(adds)
@@ -329,66 +329,66 @@ class create_runner(Pretty):
         result = self.runner.execute_job(job)
         return result
 
-@app.route("/run/", methods = ['POST'])
-def dot_run():
-    file = request.data
-    ps = Process.parse(file)
-    runner = FlexibleJobRunner()
-    filename="JOB-"+time.strftime("%Y-%m-%d_%H_%M_%S")
-    job = ps.createJob(111, filename)
-    runner.execute_job(job)
-    return job.to_dot()
-
-
-@app.route("/dot/<string:id>/", methods = ['GET', 'POST', 'DELETE'])
-@app.route("/dot/", defaults={'id': None} , methods = ['GET'])
-def dot_edit(id=None):
-    if request.method == 'GET':
-        if id == None:
-            list=store.list()
-            page=jsonify(list)
-            return page
-
-        file=store.load(id)
-        return file.to_dot()
-    if request.method == 'POST':
-        file=request.data
-        ps = Process.parse(file)
-        store.save(ps)
-        return ps.to_dot()
-    if request.method == 'DELETE':
-        store.delete(str(id))
-        return "Ok"
-
-
-class FeedDog(Activity):
-    def execute(self):
-        print("Starting feed dog")
-        # Put feed dog code here
-
-store=file_dot_data_store()
-
-if __name__ == '__main__':
-    print("Starting")
-    ps = fair_bpm_test.process()
-    #fair_bpm_test.test_parse_conditional_parents_from_dot(fair_bpm_test.good_dot_src())
-    src=fair_bpm_test.chore_dot()
-    fair_bpm_test.test_chores(src)
-    # fair_bpm_test.test_execute_with_context(ps)
-    # fair_bpm_test.get_module_class_name_from_dot_name()
-
-    # src=fair_bpm_test.good_dot_src()
-    # fair_bpm_test.test_random_activities(src)
-
-    # say=fair_bpm_test.say()
-    # sing=fair_bpm_test.sing()
-    # fair_bpm_test.test_is_parent_conditional(say, sing)
-
-    #fair_bpm_test.test_execute_with_context(ps)
-    #fair_bpm_test.test_parse_activity_from_dot()
-    #app.run(debug=True)
-    # import fair_bpm_test
-    # ps = fair_bpm_test.process()
-    # fair_bpm_test.test_parse_activity_from_dot()
-    # fair_bpm_test.test_file_store(ps)
-
+# @app.route("/run/", methods = ['POST'])
+# def dot_run():
+#     file = request.data
+#     ps = Process.parse(file)
+#     runner = FlexibleJobRunner()
+#     filename="JOB-"+time.strftime("%Y-%m-%d_%H_%M_%S")
+#     job = ps.createJob(111, filename)
+#     runner.execute_job(job)
+#     return job.to_dot()
+#
+#
+# @app.route("/dot/<string:id>/", methods = ['GET', 'POST', 'DELETE'])
+# @app.route("/dot/", defaults={'id': None} , methods = ['GET'])
+# def dot_edit(id=None):
+#     if request.method == 'GET':
+#         if id == None:
+#             list=store.list()
+#             page=jsonify(list)
+#             return page
+#
+#         file=store.load(id)
+#         return file.to_dot()
+#     if request.method == 'POST':
+#         file=request.data
+#         ps = Process.parse(file)
+#         store.save(ps)
+#         return ps.to_dot()
+#     if request.method == 'DELETE':
+#         store.delete(str(id))
+#         return "Ok"
+#
+#
+# class FeedDog(Activity):
+#     def execute(self):
+#         print("Starting feed dog")
+#         # Put feed dog code here
+#
+# store=file_dot_data_store()
+#
+# if __name__ == '__main__':
+#     print("Starting")
+#     ps = fair_bpm_test.process()
+#     #fair_bpm_test.test_parse_conditional_parents_from_dot(fair_bpm_test.good_dot_src())
+#     src=fair_bpm_test.chore_dot()
+#     fair_bpm_test.test_chores(src)
+#     # fair_bpm_test.test_execute_with_context(ps)
+#     # fair_bpm_test.get_module_class_name_from_dot_name()
+#
+#     # src=fair_bpm_test.good_dot_src()
+#     # fair_bpm_test.test_random_activities(src)
+#
+#     # say=fair_bpm_test.say()
+#     # sing=fair_bpm_test.sing()
+#     # fair_bpm_test.test_is_parent_conditional(say, sing)
+#
+#     #fair_bpm_test.test_execute_with_context(ps)
+#     #fair_bpm_test.test_parse_activity_from_dot()
+#     #app.run(debug=True)
+#     # import fair_bpm_test
+#     # ps = fair_bpm_test.process()
+#     # fair_bpm_test.test_parse_activity_from_dot()
+#     # fair_bpm_test.test_file_store(ps)
+#
