@@ -165,14 +165,12 @@ In order to be a helpful tool for non-programmers, we'll need a snazzy front end
 
 # Installation
 
-pip install git+https://github.com/fairanswers/FairBPM.git
-
-You'll also need the excellent dot_tools dot parser
+First, clone this repo.  You'll also need the excellent dot_tools dot parser
 
 pip install git+https://github.com/timtadh/dot_tools.git
 
 # Getting Started
-There is a demo available with the command
+There is a demo available in the FairBPM directory with the command
 
   python demo.py
 

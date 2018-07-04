@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97588eb1-14d7-4c96-9fa0-7256072e6151" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/demo.dot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/demo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fair_bpm.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fair_bpm_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/fair_bpm_example.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -593,7 +587,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530175631495</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Updates to install details and new demo.">
+      <created>1530721411803</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1530721411804</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -655,7 +656,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Moved venv BACK to 2.7.  dot_tools library doesn't support py 3.&#10;Got imports working for dot_tools and time.  Note:  sub-classes in package need own import line, apparently." />
     <MESSAGE value="Moved all class methods to pythin case types.&#10;Got some parent logic worked out with the help of tests." />
     <MESSAGE value="Adding test for process complete." />
     <MESSAGE value="removed StateColor as variable assigned to each activity.  Trying to parse dot files and get same graph.  Got node ids, need to handle attributes and order, probably with a custom equals on the Process object." />
@@ -680,7 +680,8 @@
     <MESSAGE value="Finally got dynamic code working!" />
     <MESSAGE value="Lots More Docs" />
     <MESSAGE value="Doc before big edit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Doc before big edit." />
+    <MESSAGE value="Updates to install details and new demo." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates to install details and new demo." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
